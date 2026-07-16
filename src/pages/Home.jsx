@@ -54,9 +54,10 @@ export default function Home() {
       {/* ---------- Hero ---------- */}
       <section className="relative isolate flex h-[100svh] max-h-[100svh] items-center overflow-hidden bg-charcoal-950">
         <HeroBackdrop
-          src="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.jpg"
-          webp="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.webp"
+          src="/images/hero-espresso-hallway.jpg"
+          webp="/images/hero-espresso-hallway.webp"
           priority
+          pan={false}
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/85 to-charcoal-950/40" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/45 to-charcoal-950/25" />
@@ -178,7 +179,7 @@ export default function Home() {
             body="Six services, one crew. Whatever your floors need, we handle it end to end."
           />
 
-          <ul className="mt-8 grid gap-5 sm:mt-14 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid gap-5 sm:mt-14 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => {
               const img = serviceImages[s.slug]
               const imageRight = i % 2 === 1
@@ -189,55 +190,62 @@ export default function Home() {
                   <article className="group flex h-full overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 ease-unveil hover:-translate-y-1.5 hover:shadow-lift">
                     <Link
                       to={servicePath(s.slug)}
-                      className={`flex h-full min-h-[13.5rem] w-full sm:min-h-[25rem] sm:flex-col ${
+                      className={`flex h-full min-h-[12rem] w-full sm:min-h-0 sm:flex-col ${
                         imageRight ? 'flex-row-reverse sm:flex-col' : ''
                       }`}
                     >
-                      <div className="relative w-[45%] shrink-0 self-stretch overflow-hidden bg-charcoal-100 sm:aspect-[16/11] sm:w-full sm:self-auto">
+                      <div className="relative w-[48%] shrink-0 self-stretch overflow-hidden bg-charcoal-100 sm:aspect-[16/12] sm:w-full sm:self-auto">
                         <picture>
-                          <source srcSet={`${img.src}-thumb.webp`} type="image/webp" />
+                          <source
+                            type="image/webp"
+                            srcSet={`${img.src}-thumb.webp 480w, ${img.src}.webp 1600w`}
+                            sizes="(min-width: 640px) 33vw, 48vw"
+                          />
                           <img
-                            src={`${img.src}-thumb.jpg`}
+                            src={`${img.src}.jpg`}
+                            srcSet={`${img.src}-thumb.jpg 480w, ${img.src}.jpg 1600w`}
                             alt={img.alt}
                             loading="lazy"
                             decoding="async"
-                            width="480"
-                            height="480"
-                            sizes="(min-width: 640px) 33vw, 45vw"
+                            width="1200"
+                            height="900"
+                            sizes="(min-width: 640px) 33vw, 48vw"
                             className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                           />
                         </picture>
                       </div>
                       <div
-                        className={`flex flex-1 flex-col p-4 sm:p-8 ${
+                        className={`flex flex-1 flex-col justify-center px-3.5 py-3 sm:px-5 sm:py-4 ${
                           dark ? 'bg-charcoal-950 text-white' : 'bg-white'
                         }`}
                       >
-                        <span
-                          className={`hidden h-12 w-12 items-center justify-center rounded-xl transition sm:inline-flex ${
-                            dark
-                              ? 'bg-white/10 text-ember-400 group-hover:bg-ember-500 group-hover:text-charcoal-950'
-                              : 'bg-ember-50 text-ember-600 group-hover:bg-ember-500 group-hover:text-white'
-                          }`}
-                        >
-                          <ServiceIcon name={s.icon} className="h-6 w-6" />
-                        </span>
-                        <h3
-                          className={`text-base font-bold sm:mt-5 sm:text-xl ${
-                            dark ? 'text-white' : 'text-charcoal-900'
-                          }`}
-                        >
-                          {s.title}
-                        </h3>
+                        <div className="flex items-center gap-2.5">
+                          <span
+                            className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition sm:h-9 sm:w-9 ${
+                              dark
+                                ? 'bg-white/10 text-ember-400 group-hover:bg-ember-500 group-hover:text-charcoal-950'
+                                : 'bg-ember-50 text-ember-600 group-hover:bg-ember-500 group-hover:text-white'
+                            }`}
+                          >
+                            <ServiceIcon name={s.icon} className="h-4 w-4 sm:h-5 sm:w-5" />
+                          </span>
+                          <h3
+                            className={`text-sm font-bold sm:text-base ${
+                              dark ? 'text-white' : 'text-charcoal-900'
+                            }`}
+                          >
+                            {s.title}
+                          </h3>
+                        </div>
                         <p
-                          className={`mt-1.5 flex-1 text-sm leading-snug text-pretty sm:mt-3 sm:leading-relaxed ${
+                          className={`mt-1.5 line-clamp-2 text-xs leading-snug text-pretty sm:text-sm ${
                             dark ? 'text-charcoal-300' : 'text-charcoal-600'
                           }`}
                         >
                           {s.blurb}
                         </p>
                         <span
-                          className={`mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold sm:pt-5 ${
+                          className={`mt-2 inline-flex items-center gap-1 text-xs font-semibold sm:mt-2.5 sm:text-sm ${
                             dark ? 'text-ember-400' : 'text-ember-600'
                           }`}
                         >
@@ -247,7 +255,7 @@ export default function Home() {
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2"
-                            className="h-4 w-4 transition group-hover:translate-x-1"
+                            className="h-3.5 w-3.5 transition group-hover:translate-x-1"
                             aria-hidden="true"
                           >
                             <path

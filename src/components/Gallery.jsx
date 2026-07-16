@@ -123,9 +123,14 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
                 aria-label={`View larger: ${photo.alt}`}
               >
                 <picture>
-                  <source srcSet={photo.thumb} type="image/webp" />
+                  <source
+                    type="image/webp"
+                    srcSet={`${photo.thumb} 480w, ${photo.src} 1200w`}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  />
                   <img
                     src={photo.thumbFallback}
+                    srcSet={`${photo.thumbFallback} 480w, ${photo.fallback} 1200w`}
                     alt={photo.alt}
                     loading="lazy"
                     decoding="async"

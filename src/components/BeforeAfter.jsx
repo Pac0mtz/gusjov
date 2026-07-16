@@ -51,11 +51,17 @@ export function BeforeAfterSlider({
   return (
     <figure ref={ref} className={compact ? 'm-0' : undefined}>
       <div className={frameClass}>
-        {/* After — thumbs in the slider for fast load; full images stay in gallery lightbox */}
+        {/* Full images — sliders fill the viewport on mobile; thumbs look soft there */}
         <picture>
-          <source srcSet={pair.after.thumb} type="image/webp" />
+          <source
+            type="image/webp"
+            srcSet={`${pair.after.thumb} 480w, ${pair.after.src} 1200w`}
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+          />
           <img
-            src={pair.after.thumbFallback}
+            src={pair.after.fallback}
+            srcSet={`${pair.after.thumbFallback} 480w, ${pair.after.fallback} 1200w`}
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
             alt={pair.after.alt}
             width={pair.after.w}
             height={pair.after.h}
@@ -76,9 +82,15 @@ export function BeforeAfterSlider({
           aria-hidden="true"
         >
           <picture>
-            <source srcSet={pair.before.thumb} type="image/webp" />
+            <source
+              type="image/webp"
+              srcSet={`${pair.before.thumb} 480w, ${pair.before.src} 1200w`}
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+            />
             <img
-              src={pair.before.thumbFallback}
+              src={pair.before.fallback}
+              srcSet={`${pair.before.thumbFallback} 480w, ${pair.before.fallback} 1200w`}
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
               alt=""
               width={pair.before.w}
               height={pair.before.h}

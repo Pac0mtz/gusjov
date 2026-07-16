@@ -64,14 +64,20 @@ export default function Projects() {
                   >
                     {cover && (
                       <picture>
-                        <source srcSet={cover.thumb} type="image/webp" />
+                        <source
+                          type="image/webp"
+                          srcSet={`${cover.thumb} 480w, ${cover.src} 1200w`}
+                          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                        />
                         <img
-                          src={cover.thumbFallback}
+                          src={cover.fallback}
+                          srcSet={`${cover.thumbFallback} 480w, ${cover.fallback} 1200w`}
                           alt={cover.alt}
                           loading="lazy"
                           decoding="async"
-                          width="600"
-                          height="450"
+                          width="900"
+                          height="675"
+                          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
                           className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
                         />
                       </picture>

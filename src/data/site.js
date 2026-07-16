@@ -72,8 +72,8 @@ export const stats = [
 // `hero` and `section` are always different images for the detail page.
 export const serviceImages = {
   'general-flooring': {
-    src: '/images/gallery/hardwood-installation/driftwood-oak-empty-room',
-    alt: 'Light driftwood oak hardwood flooring in an empty Chicago-area room',
+    src: '/images/services/general-flooring-card',
+    alt: 'Medium oak hardwood flooring filling a bright empty living room',
     hero: {
       src: '/images/gallery/hardwood-installation/light-oak-open-concept-arches',
       alt: 'Light oak hardwood flooring through an open-concept living area with arched entryways',
@@ -84,7 +84,7 @@ export const serviceImages = {
     },
   },
   'floor-installation': {
-    src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
+    src: '/images/services/floor-installation-card',
     alt: 'Warm honey oak hardwood planks newly installed in an empty room',
     hero: {
       src: '/images/gallery/hardwood-installation/glossy-acacia-hardwood-renovation',
@@ -96,11 +96,11 @@ export const serviceImages = {
     },
   },
   'laminated-floors': {
-    src: '/images/gallery/laminate-flooring/grey-plank-hallway-entry',
-    alt: 'Grey wood-look laminate plank flooring running down a hallway to a front door',
+    src: '/images/services/laminate-card',
+    alt: 'Grey wood-look laminate plank flooring in a bright residential hallway',
     hero: {
-      src: '/images/gallery/laminate-flooring/laminate-plank-basement-open',
-      alt: 'Laminate plank flooring across an open finished basement',
+      src: '/images/services/laminate-basement-lounge',
+      alt: 'Wood-look laminate flooring across a bright finished basement',
     },
     section: {
       src: '/images/gallery/laminate-flooring/laminate-plank-basement-lounge',
@@ -108,11 +108,11 @@ export const serviceImages = {
     },
   },
   'floor-refinishing': {
-    src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
-    alt: 'Freshly finished espresso-stained hardwood with a high-gloss coat',
+    src: '/images/hero-espresso-hallway',
+    alt: 'Freshly refinished dark hardwood with a high-gloss coat reflecting a window',
     hero: {
-      src: '/images/gallery/hardwood-refinishing/natural-oak-gloss-long-room',
-      alt: 'Natural oak hardwood with a high-gloss finish in a long upper-level room',
+      src: '/images/hero-espresso-hallway',
+      alt: 'Dark espresso hardwood hallway with a high-gloss finish after refinishing',
     },
     section: {
       src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
@@ -120,23 +120,23 @@ export const serviceImages = {
     },
   },
   'glued-engineered': {
-    src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
-    alt: 'Engineered hardwood flooring installed in a residential hallway',
+    src: '/images/services/engineered-glue-card',
+    alt: 'Glue-down engineered hardwood with adhesive on a concrete slab and oak planks laid in',
     hero: {
-      src: '/images/gallery/hardwood-installation/variegated-acacia-hardwood-kitchen',
-      alt: 'High-contrast variegated acacia hardwood flooring near a kitchen island',
+      src: '/images/services/engineered-glue-basement',
+      alt: 'Engineered hardwood flooring installed on a lower-level concrete slab',
     },
     section: {
-      src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
-      alt: 'Engineered hardwood flooring installed in a residential hallway',
+      src: '/images/services/engineered-glue-install-detail',
+      alt: 'Glue-down engineered hardwood planks being installed on a concrete subfloor',
     },
   },
   'interior-design': {
-    src: '/images/gallery/hardwood-installation/diagonal-oak-open-concept-columns',
-    alt: 'Diagonal oak hardwood flooring in an open-concept kitchen and living area',
+    src: '/images/services/hardwood-design-samples',
+    alt: 'Hardwood flooring sample boards laid out for species and stain selection',
     hero: {
-      src: '/images/gallery/hardwood-installation/dark-oak-diagonal-inlay-border',
-      alt: 'Custom dark hardwood floor with diagonal center field and light wood border inlay',
+      src: '/images/services/hardwood-design-samples',
+      alt: 'Oak and walnut hardwood samples for choosing flooring finish and layout',
     },
     section: {
       src: '/images/gallery/hardwood-installation/two-tone-hardwood-center-path',

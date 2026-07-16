@@ -197,14 +197,15 @@ export default function Home() {
                     >
                       <div className="relative w-[45%] shrink-0 self-stretch overflow-hidden bg-charcoal-100 sm:aspect-[16/11] sm:w-full sm:self-auto">
                         <picture>
-                          <source srcSet={`${img.src}.webp`} type="image/webp" />
+                          <source srcSet={`${img.src}-thumb.webp`} type="image/webp" />
                           <img
-                            src={`${img.src}.jpg`}
+                            src={`${img.src}-thumb.jpg`}
                             alt={img.alt}
                             loading="lazy"
                             decoding="async"
-                            width="1400"
-                            height="875"
+                            width="480"
+                            height="480"
+                            sizes="(min-width: 640px) 33vw, 45vw"
                             className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                           />
                         </picture>

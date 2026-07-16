@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Seo, { breadcrumb } from '../components/Seo'
 import { PageHero } from '../components/Bits'
 import { ContactForm } from '../components/Form'
@@ -91,9 +92,9 @@ export default function Contact() {
                 The quote form asks a few extra questions about your project, so we can come back
                 with a more accurate number first time.
               </p>
-              <a href="/quote" className="btn-primary mt-6">
+              <Link to="/quote" className="btn-primary mt-6">
                 Request a Free Quote
-              </a>
+              </Link>
             </div>
           </div>
 

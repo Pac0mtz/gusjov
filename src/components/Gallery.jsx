@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
 import { allPhotos, categories } from '../data/gallery'
-import { Reveal } from './Bits'
 
 /** Columns at each breakpoint — keep in sync with the grid classes below. */
 function useGalleryCols() {
@@ -24,7 +23,7 @@ function useGalleryCols() {
 
 /**
  * Category-filtered gallery with a lightbox.
- * Photos live in per-category folders; see src/data/gallery.js.
+ * Grid uses compressed thumbs; lightbox loads full webp/jpg on open only.
  * Pass `rows={0}` to show every photo with no expand control.
  */
 export default function Gallery({ initial = 'all', rows = 3 }) {
@@ -38,6 +37,7 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
   const hasMore = rows > 0 && shown.length > limit
   const visible = expanded || !hasMore ? shown : shown.slice(0, limit)
   const open = index >= 0 && index < shown.length
+  const current = open ? shown[index] : null
 
   const close = useCallback(() => setIndex(-1), [])
   const next = useCallback(() => setIndex((i) => (i + 1) % shown.length), [shown.length])
@@ -58,11 +58,30 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
     }
   }, [open, close, next, prev])
 
+  // Prefetch neighboring full images while lightbox is open
+  useEffect(() => {
+    if (!open || shown.length < 2) return
+    const links = [1, -1].map((delta) => {
+      const photo = shown[(index + delta + shown.length) % shown.length]
+      const link = document.createElement('link')
+      link.rel = 'prefetch'
+      link.as = 'image'
+      link.href = photo.src
+      document.head.appendChild(link)
+      return link
+    })
+    return () => links.forEach((link) => link.remove())
+  }, [open, index, shown])
+
   const filters = [{ slug: 'all', title: 'All work' }, ...categories]
 
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter projects by category">
+      <div
+        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center sm:overflow-visible"
+        role="group"
+        aria-label="Filter projects by category"
+      >
         {filters.map((f) => {
           const isActive = active === f.slug
           const count =
@@ -77,7 +96,7 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
                 setExpanded(false)
               }}
               aria-pressed={isActive}
-              className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition sm:px-5 sm:py-2.5 ${
                 isActive
                   ? 'bg-ember-500 text-white shadow-lift'
                   : 'bg-white text-charcoal-700 ring-1 ring-charcoal-200 hover:ring-ember-400 hover:text-ember-600'
@@ -93,18 +112,14 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
       </div>
 
       <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {visible.map((photo, visibleIndex) => {
+        {visible.map((photo) => {
           const i = shown.indexOf(photo)
           return (
-            <Reveal
-              key={`${photo.category}-${photo.slug}`}
-              as="li"
-              delay={Math.min(visibleIndex, 7) * 45}
-            >
+            <li key={`${photo.category}-${photo.slug}`}>
               <button
                 type="button"
                 onClick={() => setIndex(i)}
-                className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card transition duration-500 ease-unveil hover:-translate-y-0.5 hover:shadow-lift"
+                className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card transition duration-300 hover:-translate-y-0.5 hover:shadow-lift"
                 aria-label={`View larger: ${photo.alt}`}
               >
                 <picture>
@@ -114,23 +129,24 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
                     alt={photo.alt}
                     loading="lazy"
                     decoding="async"
-                    width="600"
-                    height="800"
-                    className="aspect-[4/3] h-full w-full object-cover transition duration-500 ease-unveil group-hover:scale-105 sm:aspect-[3/4]"
+                    width={photo.w}
+                    height={photo.h}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                    className="aspect-[4/3] h-full w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-[3/4]"
                   />
                 </picture>
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-left text-xs font-medium text-white opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 p-2.5 text-left text-[11px] font-medium text-white opacity-0 transition duration-300 group-hover:opacity-100 sm:p-3 sm:text-xs">
                   {photo.categoryTitle}
                 </span>
               </button>
-            </Reveal>
+            </li>
           )
         })}
       </ul>
 
       {hasMore && (
-        <Reveal className="mt-8 text-center sm:mt-10">
+        <div className="mt-8 text-center sm:mt-10">
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
@@ -139,19 +155,19 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
           >
             {expanded ? 'Show fewer photos' : `See more photos (${shown.length - limit})`}
           </button>
-        </Reveal>
+        </div>
       )}
 
       {shown.length === 0 && (
         <p className="mt-10 text-center text-charcoal-500">No photos in this category yet.</p>
       )}
 
-      {open && (
+      {current && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-charcoal-950/95 p-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label={shown[index].alt}
+          aria-label={current.alt}
           onClick={close}
         >
           <button
@@ -174,17 +190,22 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
 
           <figure className="max-h-full" onClick={(e) => e.stopPropagation()}>
             <picture>
-              <source srcSet={shown[index].src} type="image/webp" />
+              <source srcSet={current.src} type="image/webp" />
               <img
-                src={shown[index].fallback}
-                alt={shown[index].alt}
+                key={`${current.category}-${current.slug}`}
+                src={current.fallback}
+                alt={current.alt}
+                width={current.w}
+                height={current.h}
+                decoding="async"
+                fetchPriority="high"
                 className="mx-auto max-h-[78vh] w-auto rounded-lg object-contain shadow-lift"
               />
             </picture>
             <figcaption className="mx-auto mt-4 max-w-xl text-center text-sm text-charcoal-300">
-              {shown[index].alt}
+              {current.alt}
               <span className="mt-1 block text-xs text-charcoal-500">
-                {index + 1} of {shown.length} — {shown[index].categoryTitle}
+                {index + 1} of {shown.length} — {current.categoryTitle}
               </span>
             </figcaption>
           </figure>

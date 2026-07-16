@@ -51,11 +51,11 @@ export function BeforeAfterSlider({
   return (
     <figure ref={ref} className={compact ? 'm-0' : undefined}>
       <div className={frameClass}>
-        {/* After (full) */}
+        {/* After — thumbs in the slider for fast load; full images stay in gallery lightbox */}
         <picture>
-          <source srcSet={pair.after.src} type="image/webp" />
+          <source srcSet={pair.after.thumb} type="image/webp" />
           <img
-            src={pair.after.fallback}
+            src={pair.after.thumbFallback}
             alt={pair.after.alt}
             width={pair.after.w}
             height={pair.after.h}
@@ -76,9 +76,9 @@ export function BeforeAfterSlider({
           aria-hidden="true"
         >
           <picture>
-            <source srcSet={pair.before.src} type="image/webp" />
+            <source srcSet={pair.before.thumb} type="image/webp" />
             <img
-              src={pair.before.fallback}
+              src={pair.before.thumbFallback}
               alt=""
               width={pair.before.w}
               height={pair.before.h}

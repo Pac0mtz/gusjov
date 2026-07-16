@@ -13,7 +13,9 @@
     "preview": "vite preview",
     "start": "node server/index.js",
     "serve": "npm run build && node server/index.js",
-    "seo:audit": "node scripts/seo-audit.js"
+    "seo:audit": "node scripts/seo-audit.js",
+    "seo:links": "node scripts/link-check.js",
+    "optimize:gallery": "node scripts/optimize-gallery.js"
   },
   "dependencies": {
     "compression": "^1.7.4",

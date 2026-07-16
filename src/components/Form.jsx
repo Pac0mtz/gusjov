@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { services } from '../data/site'
+import { services, site } from '../data/site'
 
 /**
  * Shared form engine for /contact and /quote.
@@ -114,7 +114,7 @@ function BaseForm({ endpoint, submitLabel, fields, required }) {
         <h3 className="mt-5 text-xl font-bold text-charcoal-900">Thanks — we got your message.</h3>
         <p className="mt-2 text-charcoal-600">
           We will be in touch shortly. If it is urgent, call us on{' '}
-          <a href="tel:+17739862691" className="font-semibold text-ember-600 hover:underline">
+          <a href={site.phoneHref} className="font-semibold text-ember-600 hover:underline">
             (773) 986-2691
           </a>
           .

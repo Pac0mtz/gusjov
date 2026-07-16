@@ -69,30 +69,31 @@ export const stats = [
 ]
 
 // Photos that show each service — used on Home cards and the Services page.
+// Each slug must point at a unique file (no repeats across the six).
 export const serviceImages = {
   'general-flooring': {
-    src: '/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-entryway',
-    alt: 'Refinished red oak hardwood floor with a high-gloss finish in a Chicago-area entryway',
+    src: '/images/gallery/hardwood-installation/driftwood-oak-empty-room',
+    alt: 'Light driftwood oak hardwood flooring in an empty Chicago-area room',
   },
   'floor-installation': {
+    src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
+    alt: 'Warm honey oak hardwood planks newly installed in an empty room',
+  },
+  'laminated-floors': {
+    src: '/images/gallery/laminate-flooring/grey-plank-hallway-entry',
+    alt: 'Grey wood-look laminate plank flooring running down a hallway to a front door',
+  },
+  'floor-refinishing': {
+    src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
+    alt: 'Freshly finished espresso-stained hardwood with a high-gloss coat',
+  },
+  'glued-engineered': {
     src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
     alt: 'Engineered hardwood flooring installed in a residential hallway',
   },
-  'laminated-floors': {
-    src: '/images/gallery/laminate-flooring/laminate-plank-basement-open',
-    alt: 'Laminate plank flooring installed across an open finished basement',
-  },
-  'floor-refinishing': {
-    src: '/images/gallery/hardwood-refinishing/natural-oak-sanded-bay-window',
-    alt: 'Natural sanded red oak floor in a living room with a bay window',
-  },
-  'glued-engineered': {
-    src: '/images/gallery/staircases/stair-treads-dark-stain-hallway',
-    alt: 'Dark-stained oak treads leading to a hardwood hallway',
-  },
   'interior-design': {
-    src: '/images/gallery/staircases/curved-staircase-dark-stain',
-    alt: 'Curved staircase with dark-stained oak treads above a refinished hardwood foyer',
+    src: '/images/gallery/hardwood-installation/diagonal-oak-open-concept-columns',
+    alt: 'Diagonal oak hardwood flooring in an open-concept kitchen and living area',
   },
 }
 

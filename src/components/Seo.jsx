@@ -22,10 +22,12 @@ export default function Seo({
   noindex = false,
 }) {
   const url = `${site.url}${path === '/' ? '' : path}`
+  // Keep home under ~55–60 chars so Google doesn't truncate the brand mid-title.
   const fullTitle =
-    path === '/' ? `${site.name} | Hardwood Flooring in Chicago` : `${title} | ${site.shortName}`
+    path === '/' ? `${site.shortName} | Hardwood Flooring in Chicago` : `${title} | ${site.shortName}`
   const desc = description || site.description
   const imageUrl = image.startsWith('http') ? image : `${site.url}${image}`
+  const imageAlt = `${site.shortName} — hardwood flooring work in the Chicago area`
 
   const localBusiness = {
     '@context': 'https://schema.org',
@@ -73,6 +75,7 @@ export default function Seo({
           ],
         }
       : {}),
+    hasMap: site.social.google || undefined,
     ...(Object.values(site.social).some(Boolean)
       ? { sameAs: Object.values(site.social).filter(Boolean) }
       : {}),
@@ -123,15 +126,18 @@ export default function Seo({
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={imageAlt} />
       <meta property="og:locale" content="en_US" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={imageAlt} />
 
       <meta name="geo.region" content="US-IL" />
       <meta name="geo.placename" content="Chicago" />
+      <meta name="author" content={site.name} />
 
       <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>
       <script type="application/ld+json">{JSON.stringify(website)}</script>

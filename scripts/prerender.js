@@ -48,45 +48,45 @@ if (!template.includes('<div id="root"></div>')) {
   )
 }
 
+function applyHelmet(templateHtml, html, helmet) {
+  // Helmet's tags replace the static fallbacks in index.html. Without this the
+  // prerendered page would carry the Home <title> in the markup and only fix
+  // itself once React hydrated — the exact bug we are removing.
+  // `priority` MUST come first and MUST NOT be dropped. Seo.jsx renders
+  // <Helmet prioritizeSeoTags>, which moves the tags that matter most --
+  // title, description, canonical, the og:* set -- out of .meta/.link and
+  // into .priority. Omit it and the prerendered head silently loses its
+  // canonical, its description and every Open Graph tag, which is worse than
+  // not prerendering at all.
+  const head = helmet
+    ? [
+        helmet.priority.toString(),
+        helmet.title.toString(),
+        helmet.meta.toString(),
+        helmet.link.toString(),
+        helmet.script.toString(),
+      ]
+        .filter(Boolean)
+        .join('\n    ')
+    : ''
+
+  const htmlAttrs = helmet?.htmlAttributes?.toString() ?? ''
+
+  return templateHtml
+    .replace(/<title>[\s\S]*?<\/title>\s*/, '')
+    .replace(/<meta\s+name="description"[\s\S]*?\/>\s*/, '')
+    .replace('</head>', `  ${head}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+    .replace('<html lang="en">', htmlAttrs ? `<html ${htmlAttrs}>` : '<html lang="en">')
+}
+
 const routes = await routesFromSitemap()
 let failed = 0
 
 for (const route of routes) {
   try {
     const { html, helmet } = await render(route)
-
-    // Helmet's tags replace the static fallbacks in index.html. Without this the
-    // prerendered page would carry the Home <title> in the markup and only fix
-    // itself once React hydrated — the exact bug we are removing.
-    // `priority` MUST come first and MUST NOT be dropped. Seo.jsx renders
-    // <Helmet prioritizeSeoTags>, which moves the tags that matter most --
-    // title, description, canonical, the og:* set -- out of .meta/.link and
-    // into .priority. Omit it and the prerendered head silently loses its
-    // canonical, its description and every Open Graph tag, which is worse than
-    // not prerendering at all.
-    const head = helmet
-      ? [
-          helmet.priority.toString(),
-          helmet.title.toString(),
-          helmet.meta.toString(),
-          helmet.link.toString(),
-          helmet.script.toString(),
-        ]
-          .filter(Boolean)
-          .join('\n    ')
-      : ''
-
-    const htmlAttrs = helmet?.htmlAttributes?.toString() ?? ''
-
-    const page = template
-      // Drop the static <title>/<description> fallbacks; Helmet supplies real ones.
-      .replace(/<title>[\s\S]*?<\/title>\s*/, '')
-      .replace(/<meta\s+name="description"[\s\S]*?\/>\s*/, '')
-      .replace('</head>', `  ${head}\n  </head>`)
-      .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
-      // Helmet emits its own lang, so swap the tag wholesale rather than append
-      // — otherwise the output is <html lang="en" lang="en">.
-      .replace('<html lang="en">', htmlAttrs ? `<html ${htmlAttrs}>` : '<html lang="en">')
+    const page = applyHelmet(template, html, helmet)
 
     const outDir = route === '/' ? DIST : path.join(DIST, route)
     await mkdir(outDir, { recursive: true })
@@ -100,6 +100,18 @@ for (const route of routes) {
   }
 }
 
+// Dedicated 404 document so unknown URLs do not inherit the home page <head>.
+// Served with HTTP 404 by server/index.js.
+try {
+  const { html, helmet } = await render('/__not-found__')
+  const page = applyHelmet(template, html, helmet)
+  await writeFile(path.join(DIST, '404.html'), page)
+  console.log(`  ✓ ${'/404.html'.padEnd(12)} (noindex soft-404 shell)`)
+} catch (err) {
+  failed++
+  console.error(`  ✗ /404.html — ${err.message}`)
+}
+
 if (failed) {
   // Fail the build. A half-prerendered dist is worse than none: the routes that
   // silently fell back to the SPA shell would look fine locally and serve the
@@ -108,4 +120,4 @@ if (failed) {
   process.exit(1)
 }
 
-console.log(`\nPrerendered ${routes.length} routes.`)
+console.log(`\nPrerendered ${routes.length} routes + 404.html.`)

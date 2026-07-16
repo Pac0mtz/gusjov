@@ -2,9 +2,8 @@
 //
 // Every photo here is a real Gusjov job pulled from the WordPress media library
 // and sorted by category after visual inspection -- not by filename. Files live
-// under public/images/gallery/<category>/ as <slug>.webp/.jpg (1400px) plus
-// <slug>-thumb.webp/.jpg (600px). The stock photos and the architecture-firm
-// demo images that shipped with the Astra template were left behind.
+// under public/images/gallery/<category>/ as <slug>.webp/.jpg (≤1200px) plus
+// <slug>-thumb.webp/.jpg (≤480px). Recompress with: node scripts/optimize-gallery.js
 //
 // To add a photo: drop the pair into the category folder and add an entry.
 

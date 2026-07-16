@@ -221,6 +221,12 @@ app.get('*', (req, res, next) => {
   if (prerendered.startsWith(DIST) && existsSync(prerendered)) {
     return res.sendFile(prerendered)
   }
+
+  // Unknown URLs: real HTTP 404 + a noindex document (not the home page head).
+  const notFound = path.join(DIST, '404.html')
+  if (existsSync(notFound)) {
+    return res.status(404).sendFile(notFound)
+  }
   res.status(404).sendFile(path.join(DIST, 'index.html'))
 })
 

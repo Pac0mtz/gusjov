@@ -12,18 +12,29 @@ const Contact = lazy(() => import('./pages/Contact'))
 const Quote = lazy(() => import('./pages/Quote'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
-/** Reset scroll on navigation, but honour in-page #anchors. */
+/** Reset scroll on navigation, but honour in-page #anchors (retries for lazy routes). */
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(hash.slice(1))
+    if (!hash) {
+      window.scrollTo(0, 0)
+      return
+    }
+
+    const id = decodeURIComponent(hash.slice(1))
+    let attempts = 0
+    let raf = 0
+    const tryScroll = () => {
+      const el = document.getElementById(id)
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
         return
       }
+      // Lazy pages need a few frames before the target id exists.
+      if (attempts++ < 60) raf = requestAnimationFrame(tryScroll)
     }
-    window.scrollTo(0, 0)
+    tryScroll()
+    return () => cancelAnimationFrame(raf)
   }, [pathname, hash])
   return null
 }

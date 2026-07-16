@@ -44,7 +44,8 @@
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
-           transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+           transition duration-300 disabled:cursor-not-allowed disabled:opacity-60;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .btn-primary {
@@ -84,5 +85,28 @@
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* Scroll-triggered reveal — toggled by the Reveal component */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }

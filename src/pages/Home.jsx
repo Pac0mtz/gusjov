@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
-import { CtaBand, Counter, SectionHeading, ServiceIcon } from '../components/Bits'
+import { CtaBand, Counter, Reveal, SectionHeading, ServiceIcon } from '../components/Bits'
 import BeforeAfter from '../components/BeforeAfter'
 import Gallery from '../components/Gallery'
 import Testimonials from '../components/Testimonials'
@@ -65,16 +65,27 @@ export default function Home() {
 
         <div className="container-content w-full py-8 pt-24 sm:pb-16 sm:pt-32">
           <div className="flex max-w-2xl flex-col justify-center">
-            <p className="eyebrow animate-fade-up">{site.name}</p>
-            <h1 className="mt-3 text-[2.75rem] font-extrabold leading-[1.05] text-white animate-fade-up sm:mt-4 sm:text-6xl md:text-7xl">
+            <p className="eyebrow animate-fade-up" style={{ animationDelay: '40ms' }}>
+              {site.name}
+            </p>
+            <h1
+              className="mt-3 text-5xl font-extrabold leading-[1.05] text-white animate-soft-rise sm:mt-4 sm:text-6xl md:text-7xl lg:text-8xl"
+              style={{ animationDelay: '120ms' }}
+            >
               Great Prices,{' '}
               <span className="text-ember-400">Honest Service</span> &amp; Stunning Results
             </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-charcoal-200 animate-fade-up text-pretty sm:mt-7 sm:text-lg">
+            <p
+              className="mt-4 max-w-xl text-base leading-relaxed text-charcoal-200 animate-fade-up text-pretty sm:mt-7 sm:text-lg"
+              style={{ animationDelay: '220ms' }}
+            >
               Our goal then and now is to provide quality &amp; affordable hardwood flooring
               services across the Chicago area.
             </p>
-            <div className="mt-9 flex flex-row flex-wrap gap-3 animate-fade-up sm:mt-12">
+            <div
+              className="mt-8 flex flex-row flex-wrap gap-3 animate-fade-up sm:mt-12"
+              style={{ animationDelay: '320ms' }}
+            >
               <Link to="/quote" className="btn-primary">
                 Get Free Quote
               </Link>
@@ -83,7 +94,10 @@ export default function Home() {
               </Link>
             </div>
 
-            <dl className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-3 border-t border-white/10 pt-5 sm:mt-14 sm:gap-x-10 sm:pt-8">
+            <dl
+              className="mt-8 flex flex-wrap items-end gap-x-8 gap-y-3 border-t border-white/10 pt-5 animate-fade-up sm:mt-10 sm:gap-x-10 sm:pt-8"
+              style={{ animationDelay: '400ms' }}
+            >
               <div>
                 <dt className="text-xs uppercase tracking-widest text-charcoal-400">Call us</dt>
                 <dd>
@@ -114,7 +128,7 @@ export default function Home() {
       {/* ---------- Welcome ---------- */}
       <section className="bg-white py-12 sm:py-20 lg:py-28">
         <div className="container-content grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="relative">
+          <Reveal className="relative">
             <picture>
               <source srcSet="/images/gallery/staircases/curved-staircase-dark-stain.webp" type="image/webp" />
               <img
@@ -135,7 +149,7 @@ export default function Home() {
                 experience
               </p>
             </div>
-          </div>
+          </Reveal>
 
           <div>
             <SectionHeading
@@ -144,17 +158,19 @@ export default function Home() {
               title="Quality. On time. Professional."
               body={introCopy}
             />
-            <p className="mt-5 leading-relaxed text-charcoal-600 text-pretty sm:mt-6">
-              {specializationCopy}
-            </p>
-            <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
-              <Link to="/services" className="btn-dark">
-                Our Services
-              </Link>
-              <Link to="/projects" className="btn-ghost !border-charcoal-300 !text-charcoal-700 hover:!border-ember-500 hover:!text-ember-600">
-                See Our Work
-              </Link>
-            </div>
+            <Reveal delay={100}>
+              <p className="mt-5 leading-relaxed text-charcoal-600 text-pretty sm:mt-6">
+                {specializationCopy}
+              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+                <Link to="/services" className="btn-dark">
+                  Our Services
+                </Link>
+                <Link to="/projects" className="btn-ghost !border-charcoal-300 !text-charcoal-700 hover:!border-ember-500 hover:!text-ember-600">
+                  See Our Work
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -168,17 +184,18 @@ export default function Home() {
             body="Six services, one crew. Whatever your floors need, we handle it end to end."
           />
 
-          <ul className="mt-8 grid gap-3 sm:mt-14 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid gap-5 sm:mt-14 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => {
               const img = serviceImages[s.slug]
               const imageRight = i % 2 === 1
+              const dark = i % 2 === 1
 
               return (
-                <li key={s.slug} className="h-full">
-                  <article className="group flex h-full overflow-hidden rounded-2xl bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+                <Reveal key={s.slug} as="li" className="h-full" delay={Math.min(i, 5) * 70}>
+                  <article className="group flex h-full overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 ease-unveil hover:-translate-y-1.5 hover:shadow-lift">
                     <Link
                       to={`/services#${s.slug}`}
-                      className={`flex h-full min-h-[11.5rem] w-full sm:min-h-[22rem] sm:flex-col ${
+                      className={`flex h-full min-h-[13.5rem] w-full sm:min-h-[25rem] sm:flex-col ${
                         imageRight ? 'flex-row-reverse sm:flex-col' : ''
                       }`}
                     >
@@ -196,17 +213,39 @@ export default function Home() {
                           />
                         </picture>
                       </div>
-                      <div className="flex flex-1 flex-col p-4 sm:p-8">
-                        <span className="hidden h-12 w-12 items-center justify-center rounded-xl bg-ember-50 text-ember-600 transition group-hover:bg-ember-500 group-hover:text-white sm:inline-flex">
+                      <div
+                        className={`flex flex-1 flex-col p-4 sm:p-8 ${
+                          dark ? 'bg-charcoal-950 text-white' : 'bg-white'
+                        }`}
+                      >
+                        <span
+                          className={`hidden h-12 w-12 items-center justify-center rounded-xl transition sm:inline-flex ${
+                            dark
+                              ? 'bg-white/10 text-ember-400 group-hover:bg-ember-500 group-hover:text-charcoal-950'
+                              : 'bg-ember-50 text-ember-600 group-hover:bg-ember-500 group-hover:text-white'
+                          }`}
+                        >
                           <ServiceIcon name={s.icon} className="h-6 w-6" />
                         </span>
-                        <h3 className="text-base font-bold text-charcoal-900 sm:mt-5 sm:text-xl">
+                        <h3
+                          className={`text-base font-bold sm:mt-5 sm:text-xl ${
+                            dark ? 'text-white' : 'text-charcoal-900'
+                          }`}
+                        >
                           {s.title}
                         </h3>
-                        <p className="mt-1.5 flex-1 text-sm leading-snug text-charcoal-600 text-pretty sm:mt-3 sm:leading-relaxed">
+                        <p
+                          className={`mt-1.5 flex-1 text-sm leading-snug text-pretty sm:mt-3 sm:leading-relaxed ${
+                            dark ? 'text-charcoal-300' : 'text-charcoal-600'
+                          }`}
+                        >
                           {s.blurb}
                         </p>
-                        <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold text-ember-600 sm:pt-5">
+                        <span
+                          className={`mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold sm:pt-5 ${
+                            dark ? 'text-ember-400' : 'text-ember-600'
+                          }`}
+                        >
                           Learn more
                           <svg
                             viewBox="0 0 24 24"
@@ -226,7 +265,7 @@ export default function Home() {
                       </div>
                     </Link>
                   </article>
-                </li>
+                </Reveal>
               )
             })}
           </ul>

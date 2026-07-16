@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { allPhotos, categories } from '../data/gallery'
+import { Reveal } from './Bits'
 
 /** Columns at each breakpoint — keep in sync with the grid classes below. */
 function useGalleryCols() {
@@ -92,14 +93,18 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
       </div>
 
       <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {visible.map((photo) => {
+        {visible.map((photo, visibleIndex) => {
           const i = shown.indexOf(photo)
           return (
-            <li key={`${photo.category}-${photo.slug}`}>
+            <Reveal
+              key={`${photo.category}-${photo.slug}`}
+              as="li"
+              delay={Math.min(visibleIndex, 7) * 45}
+            >
               <button
                 type="button"
                 onClick={() => setIndex(i)}
-                className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card"
+                className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card transition duration-500 ease-unveil hover:-translate-y-0.5 hover:shadow-lift"
                 aria-label={`View larger: ${photo.alt}`}
               >
                 <picture>
@@ -111,21 +116,21 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
                     decoding="async"
                     width="600"
                     height="800"
-                    className="aspect-[4/3] h-full w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-[3/4]"
+                    className="aspect-[4/3] h-full w-full object-cover transition duration-500 ease-unveil group-hover:scale-105 sm:aspect-[3/4]"
                   />
                 </picture>
-                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-left text-xs font-medium text-white opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-left text-xs font-medium text-white opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   {photo.categoryTitle}
                 </span>
               </button>
-            </li>
+            </Reveal>
           )
         })}
       </ul>
 
       {hasMore && (
-        <div className="mt-8 text-center sm:mt-10">
+        <Reveal className="mt-8 text-center sm:mt-10">
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
@@ -134,7 +139,7 @@ export default function Gallery({ initial = 'all', rows = 3 }) {
           >
             {expanded ? 'Show fewer photos' : `See more photos (${shown.length - limit})`}
           </button>
-        </div>
+        </Reveal>
       )}
 
       {shown.length === 0 && (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { site } from '../data/site'
 
 /** Fires once when the element first scrolls into view. */
-export function useInView(options = { threshold: 0.25, rootMargin: '0px 0px -60px 0px' }) {
+export function useInView(options = { threshold: 0.2, rootMargin: '0px 0px -48px 0px' }) {
   const ref = useRef(null)
   const [inView, setInView] = useState(false)
 
@@ -27,10 +27,27 @@ export function useInView(options = { threshold: 0.25, rootMargin: '0px 0px -60p
   return [ref, inView]
 }
 
+/**
+ * Elegant scroll reveal. Use `delay` (ms) to stagger siblings.
+ * `as` lets you reveal as `li`, `article`, etc.
+ */
+export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' }) {
+  const [ref, inView] = useInView()
+  return (
+    <Tag
+      ref={ref}
+      className={`reveal ${inView ? 'is-visible' : ''} ${className}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    >
+      {children}
+    </Tag>
+  )
+}
+
 export function SectionHeading({ eyebrow, title, body, align = 'center', light = false }) {
   const centered = align === 'center'
   return (
-    <div className={`max-w-2xl ${centered ? 'mx-auto text-center' : ''}`}>
+    <Reveal className={`max-w-2xl ${centered ? 'mx-auto text-center' : ''}`}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2
         className={`mt-3 text-3xl font-bold leading-[1.15] sm:text-4xl md:text-[2.75rem] ${
@@ -40,7 +57,9 @@ export function SectionHeading({ eyebrow, title, body, align = 'center', light =
         {title}
       </h2>
       <span
-        className={`mt-5 block h-1 w-14 rounded-full bg-ember-500 ${centered ? 'mx-auto' : ''}`}
+        className={`mt-5 block h-1 w-14 origin-center rounded-full bg-ember-500 transition-transform duration-700 ease-unveil ${
+          centered ? 'mx-auto' : ''
+        }`}
       />
       {body && (
         <p
@@ -51,7 +70,7 @@ export function SectionHeading({ eyebrow, title, body, align = 'center', light =
           {body}
         </p>
       )}
-    </div>
+    </Reveal>
   )
 }
 
@@ -117,7 +136,7 @@ export function CtaBand({
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/90 to-charcoal-950/60" />
 
       <div className="container-content py-20 sm:py-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="eyebrow">Contact us</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{title}</h2>
           <p className="mt-5 text-base leading-relaxed text-charcoal-300 text-pretty">{body}</p>
@@ -129,7 +148,7 @@ export function CtaBand({
               Call {site.phone}
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

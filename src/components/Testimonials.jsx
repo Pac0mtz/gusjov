@@ -1,4 +1,4 @@
-import { SectionHeading } from './Bits'
+import { Reveal, SectionHeading } from './Bits'
 import { googleProfile, googleRating, reviews, featuredReviews } from '../data/reviews'
 
 /**
@@ -120,17 +120,19 @@ export default function Testimonials({ light = false }) {
           light={light}
         />
 
-        <div className="mt-8 flex justify-center">
+        <Reveal className="mt-8 flex justify-center" delay={80}>
           <GoogleRatingBadge light={light} />
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {featuredReviews.map((review) => (
-            <ReviewCard key={review.author} review={review} light={light} />
+          {featuredReviews.map((review, i) => (
+            <Reveal key={review.author} delay={120 + i * 90}>
+              <ReviewCard review={review} light={light} />
+            </Reveal>
           ))}
         </div>
 
-        <p className="mt-10 text-center">
+        <Reveal className="mt-10 text-center" delay={200}>
           <a
             href={googleProfile.url}
             target="_blank"
@@ -139,7 +141,7 @@ export default function Testimonials({ light = false }) {
           >
             Read all {googleRating.count} reviews on Google →
           </a>
-        </p>
+        </Reveal>
       </div>
     </section>
   )

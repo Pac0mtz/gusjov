@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { beforeAfterPairs } from '../data/gallery'
-import { useInView } from './Bits'
+import { Reveal, useInView } from './Bits'
 
 /**
  * Drag / keyboard before–after reveal for a single pair.
@@ -161,9 +161,9 @@ export default function BeforeAfter({ pairs = beforeAfterPairs }) {
   return (
     <ul className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {pairs.map((pair, i) => (
-        <li key={pair.id}>
+        <Reveal key={pair.id} as="li" delay={Math.min(i, 4) * 90}>
           <BeforeAfterSlider pair={pair} priority={i < 2} />
-        </li>
+        </Reveal>
       ))}
     </ul>
   )

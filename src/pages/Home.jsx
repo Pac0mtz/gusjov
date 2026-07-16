@@ -54,8 +54,8 @@ export default function Home() {
       {/* ---------- Hero ---------- */}
       <section className="relative isolate flex h-[100svh] max-h-[100svh] items-center overflow-hidden bg-charcoal-950">
         <HeroBackdrop
-          src="/images/hero-solid-oak.jpg"
-          webp="/images/hero-solid-oak.webp"
+          src="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.jpg"
+          webp="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.webp"
           priority
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/85 to-charcoal-950/40" />

@@ -1,37 +1,7 @@
 import { Link } from 'react-router-dom'
 import Seo, { breadcrumb } from '../components/Seo'
 import { CtaBand, PageHero, SectionHeading, ServiceIcon } from '../components/Bits'
-import { services, site, specializationCopy, whyUs } from '../data/site'
-
-// Photos that genuinely show each service. Services without a matching photo in
-// the library fall back to the section image — better an honest gap than a
-// stock photo pretending to be our work.
-const serviceImage = {
-  'general-flooring': {
-    src: '/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-entryway',
-    alt: 'Refinished red oak hardwood floor with a high-gloss finish in a Chicago-area entryway',
-  },
-  'floor-installation': {
-    src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
-    alt: 'Engineered hardwood flooring installed in a residential hallway',
-  },
-  'laminated-floors': {
-    src: '/images/gallery/laminate-flooring/laminate-plank-basement-open',
-    alt: 'Laminate plank flooring installed across an open finished basement',
-  },
-  'floor-refinishing': {
-    src: '/images/gallery/hardwood-refinishing/natural-oak-sanded-bay-window',
-    alt: 'Natural sanded red oak floor in a living room with a bay window',
-  },
-  'glued-engineered': {
-    src: '/images/gallery/staircases/stair-treads-dark-stain-hallway',
-    alt: 'Dark-stained oak treads leading to a hardwood hallway',
-  },
-  'interior-design': {
-    src: '/images/gallery/staircases/curved-staircase-dark-stain',
-    alt: 'Curved staircase with dark-stained oak treads above a refinished hardwood foyer',
-  },
-}
+import { serviceImages, services, site, specializationCopy, whyUs } from '../data/site'
 
 export default function Services() {
   const schema = {
@@ -72,7 +42,7 @@ export default function Services() {
       <section className="bg-white py-20 sm:py-24">
         <div className="container-content space-y-24">
           {services.map((s, i) => {
-            const img = serviceImage[s.slug]
+            const img = serviceImages[s.slug]
             const flipped = i % 2 === 1
             return (
               <article

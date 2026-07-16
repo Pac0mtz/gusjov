@@ -99,3 +99,34 @@ export const allPhotos = categories.flatMap((c) =>
 )
 
 export const photoCount = allPhotos.length
+
+function galleryPhoto(category, slug) {
+  const p = allPhotos.find((x) => x.category === category && x.slug === slug)
+  if (!p) throw new Error(`Missing gallery photo: ${category}/${slug}`)
+  return p
+}
+
+// Same-job pairs found by visual match (room layout / stairs), not filename.
+export const beforeAfterPairs = [
+  {
+    id: 'natural-oak-room',
+    title: 'Natural oak refinish',
+    blurb: 'Dull, worn boards sanded and sealed to a high-gloss finish in the same room.',
+    before: galleryPhoto('hardwood-refinishing', 'natural-oak-refinish-room-2'),
+    after: galleryPhoto('hardwood-refinishing', 'natural-oak-refinish-finish'),
+  },
+  {
+    id: 'oak-repair-lace-in',
+    title: 'Oak floor repair & lace-in',
+    blurb: 'Damaged boards pulled and the subfloor opened, then new oak laced in and sanded flush.',
+    before: galleryPhoto('hardwood-refinishing', 'natural-oak-sanded-room'),
+    after: galleryPhoto('hardwood-refinishing', 'natural-oak-refinish-progress'),
+  },
+  {
+    id: 'curved-staircase',
+    title: 'Curved staircase gloss coat',
+    blurb: 'The same curved foyer stairs after a mirror-gloss protective coat.',
+    before: galleryPhoto('staircases', 'curved-staircase-dark-stain'),
+    after: galleryPhoto('staircases', 'curved-staircase-glossy-treads'),
+  },
+]

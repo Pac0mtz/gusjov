@@ -1,7 +1,8 @@
 import Seo, { breadcrumb } from '../components/Seo'
 import { CtaBand, PageHero, SectionHeading } from '../components/Bits'
+import BeforeAfter from '../components/BeforeAfter'
 import Gallery from '../components/Gallery'
-import { allPhotos, categories, photoCount } from '../data/gallery'
+import { allPhotos, beforeAfterPairs, categories, photoCount } from '../data/gallery'
 import { site } from '../data/site'
 
 export default function Projects() {
@@ -94,8 +95,22 @@ export default function Projects() {
         </div>
       </section>
 
+      {/* ---------- Before / After ---------- */}
+      <section id="before-after" className="scroll-mt-24 bg-charcoal-50 py-20 sm:py-24">
+        <div className="container-content">
+          <SectionHeading
+            eyebrow="Before & after"
+            title="Slide to see the difference"
+            body={`${beforeAfterPairs.length} real jobs — same room or staircase, caught mid-work and after the finish went down. Drag the handle to compare.`}
+          />
+          <div className="mt-14">
+            <BeforeAfter />
+          </div>
+        </div>
+      </section>
+
       {/* ---------- Gallery ---------- */}
-      <section id="gallery" className="scroll-mt-24 bg-charcoal-50 py-20 sm:py-24">
+      <section id="gallery" className="scroll-mt-24 bg-white py-20 sm:py-24">
         <div className="container-content">
           <SectionHeading
             eyebrow="Project Gallery"

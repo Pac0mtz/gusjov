@@ -68,6 +68,34 @@ export const stats = [
   { value: 230, suffix: '+', label: 'Projects' },
 ]
 
+// Photos that show each service — used on Home cards and the Services page.
+export const serviceImages = {
+  'general-flooring': {
+    src: '/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-entryway',
+    alt: 'Refinished red oak hardwood floor with a high-gloss finish in a Chicago-area entryway',
+  },
+  'floor-installation': {
+    src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
+    alt: 'Engineered hardwood flooring installed in a residential hallway',
+  },
+  'laminated-floors': {
+    src: '/images/gallery/laminate-flooring/laminate-plank-basement-open',
+    alt: 'Laminate plank flooring installed across an open finished basement',
+  },
+  'floor-refinishing': {
+    src: '/images/gallery/hardwood-refinishing/natural-oak-sanded-bay-window',
+    alt: 'Natural sanded red oak floor in a living room with a bay window',
+  },
+  'glued-engineered': {
+    src: '/images/gallery/staircases/stair-treads-dark-stain-hallway',
+    alt: 'Dark-stained oak treads leading to a hardwood hallway',
+  },
+  'interior-design': {
+    src: '/images/gallery/staircases/curved-staircase-dark-stain',
+    alt: 'Curved staircase with dark-stained oak treads above a refinished hardwood foyer',
+  },
+}
+
 // --- verified: the six icon-box widgets on the home page. Titles and the
 // short blurbs are the original copy. `detail` is expanded copy written from
 // those same facts for the services page -- no new claims are introduced.
@@ -75,7 +103,7 @@ export const services = [
   {
     slug: 'general-flooring',
     title: 'General Flooring',
-    blurb: 'We do all types of hardwood floors and textures.',
+    blurb: 'All hardwood types and textures for every room.',
     detail:
       'Whatever is underfoot now, we can work with it. We handle hardwood in every common species and texture, from tight-grain strip oak to wide-plank boards, and we will tell you honestly whether your floor wants a repair, a refinish or a full replacement.',
     icon: 'plank',
@@ -83,7 +111,7 @@ export const services = [
   {
     slug: 'floor-installation',
     title: 'Floor Installation',
-    blurb: 'Replacement or new installations available.',
+    blurb: 'New installs or full replacements, start to finish.',
     detail:
       'New construction or tearing out what is already there. We handle the whole job: removal and disposal of the old floor, subfloor prep, layout, installation and trim, so the finished floor sits flat and clean against your baseboards.',
     icon: 'hammer',
@@ -91,8 +119,7 @@ export const services = [
   {
     slug: 'laminated-floors',
     title: 'Laminated Floors',
-    blurb:
-      'Laminated floors are a perfect solution for those who want their floor to last with lots of textures available.',
+    blurb: 'Durable laminate in many textures, built to last.',
     detail:
       'Laminate earns its keep in basements, rentals and high-traffic rooms where solid hardwood is not the right call. It stands up to scratches, spills and kids, and modern textures read convincingly like real wood.',
     icon: 'layers',
@@ -100,7 +127,7 @@ export const services = [
   {
     slug: 'floor-refinishing',
     title: 'Floor Refinishes',
-    blurb: 'Get a new look to those ugly scratches and dents or just an overall fresh coat.',
+    blurb: 'Fresh coats that hide scratches, dents and wear.',
     detail:
       'Most tired floors do not need replacing. Sanding back to bare wood and laying down a fresh stain and protective coat brings a scratched, dull floor back, usually for a fraction of what new flooring costs.',
     icon: 'sparkle',
@@ -108,7 +135,7 @@ export const services = [
   {
     slug: 'glued-engineered',
     title: 'Glued Engineered',
-    blurb: 'Glued engineered hardwood floors will add the perfect touch for your home.',
+    blurb: 'Glued engineered hardwood with a clean finished look.',
     detail:
       'Engineered hardwood gives you a real wood wear layer over a stable core, so it copes with concrete slabs and below-grade rooms where solid hardwood would move. Glue-down installation keeps it quiet and solid underfoot.',
     icon: 'grid',
@@ -116,8 +143,7 @@ export const services = [
   {
     slug: 'interior-design',
     title: 'Interior Design',
-    blurb:
-      'We offer several different types of hardwoods for every need from residential applications to commercial.',
+    blurb: 'Hardwood choices for residential and commercial spaces.',
     detail:
       'Choosing species, stain and layout is the part most people find hardest. We bring samples, talk through how each option lives with your light, your rooms and your traffic, and help you land on a floor you will still like in ten years.',
     icon: 'palette',

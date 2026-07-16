@@ -85,11 +85,11 @@ export function Counter({ value, suffix = '', label }) {
 
   return (
     <div ref={ref} className="text-center">
-      <p className="font-display text-4xl font-extrabold text-ember-400 sm:text-5xl">
+      <p className="font-display text-2xl font-extrabold text-ember-400 sm:text-5xl">
         {n}
         {suffix}
       </p>
-      <p className="mt-2 text-sm font-medium uppercase tracking-widest text-charcoal-300">
+      <p className="mt-1 text-[10px] font-medium uppercase tracking-widest text-charcoal-300 sm:mt-2 sm:text-sm">
         {label}
       </p>
     </div>

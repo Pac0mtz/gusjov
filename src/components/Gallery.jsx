@@ -64,7 +64,7 @@ export default function Gallery({ initial = 'all' }) {
         })}
       </div>
 
-      <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {shown.map((photo, i) => (
           <li key={`${photo.category}-${photo.slug}`}>
             <button
@@ -82,7 +82,7 @@ export default function Gallery({ initial = 'all' }) {
                   decoding="async"
                   width="600"
                   height="800"
-                  className="aspect-[3/4] h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  className="aspect-[4/3] h-full w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-[3/4]"
                 />
               </picture>
               <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />

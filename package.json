@@ -1,0 +1,39 @@
+{
+  "name": "gusjov-flooring",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Gusjov Flooring Services Inc. — hardwood flooring installation, refinishing and laminate in the Chicago area.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:server && npm run prerender",
+    "build:client": "vite build",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist-ssr",
+    "prerender": "node scripts/prerender.js",
+    "preview": "vite preview",
+    "start": "node server/index.js",
+    "serve": "npm run build && node server/index.js",
+    "seo:audit": "node scripts/seo-audit.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "nodemailer": "^6.9.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vite": "^5.4.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

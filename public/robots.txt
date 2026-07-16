@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# No admin surface to hide — this is a static React build.
+Disallow: /api/
+
+Sitemap: https://gusjov.com/sitemap.xml

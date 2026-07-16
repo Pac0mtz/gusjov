@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-charcoal-950 text-charcoal-100 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight text-balance;
+  }
+
+  /* Visible focus for keyboard users only, on the accent colour. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ember-400 ring-offset-2 ring-offset-charcoal-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+           transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-ember-400 text-charcoal-950 hover:bg-ember-300 hover:shadow-lift active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn border border-charcoal-100/25 text-charcoal-50 hover:border-ember-400 hover:text-ember-300;
+  }
+
+  .btn-dark {
+    @apply btn bg-charcoal-900 text-white hover:bg-charcoal-800;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-ember-400;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-charcoal-200/70 bg-white px-4 py-3 text-charcoal-900
+           placeholder:text-charcoal-400 transition
+           focus:border-ember-400 focus:outline-none focus:ring-2 focus:ring-ember-400/30;
+  }
+
+  .field-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-400/30;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-charcoal-700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}

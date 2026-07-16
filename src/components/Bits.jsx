@@ -48,14 +48,14 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
  * Full-bleed hero backdrop that pans horizontally as the section scrolls.
  * Image is wider than the frame; travel is scroll-linked.
  */
-export function HeroBackdrop({ src, webp, priority = false }) {
+export function HeroBackdrop({ src, webp, priority = false, pan = true }) {
   const frameRef = useRef(null)
   const imgRef = useRef(null)
 
   useEffect(() => {
     const frame = frameRef.current
     const img = imgRef.current
-    if (!frame || !img) return
+    if (!frame || !img || !pan) return
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (reduce.matches) return
@@ -67,9 +67,9 @@ export function HeroBackdrop({ src, webp, priority = false }) {
       const span = Math.max(rect.height * 0.85, 1)
       const progress = Math.min(1, Math.max(0, -rect.top / span))
       const frameW = frame.clientWidth || 1
-      const imgW = img.offsetWidth || frameW * 1.28
+      const imgW = img.offsetWidth || frameW
       const travel = Math.max(0, imgW - frameW)
-      img.style.transform = `translate3d(${-progress * travel}px, 0, 0)`
+      img.style.transform = travel ? `translate3d(${-progress * travel}px, 0, 0)` : 'translate3d(0, 0, 0)'
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
@@ -91,17 +91,21 @@ export function HeroBackdrop({ src, webp, priority = false }) {
       img.removeEventListener('load', update)
       ro?.disconnect()
     }
-  }, [src])
+  }, [src, pan])
 
   return (
-    <div ref={frameRef} className="hero-backdrop" aria-hidden="true">
+    <div
+      ref={frameRef}
+      className={`hero-backdrop${pan ? ' hero-backdrop--pan' : ''}`}
+      aria-hidden="true"
+    >
       <picture>
         {webp ? <source srcSet={webp} type="image/webp" /> : null}
         <img
           ref={imgRef}
           src={src}
           alt=""
-          fetchpriority={priority ? 'high' : undefined}
+          fetchPriority={priority ? 'high' : undefined}
           decoding="async"
           className="hero-backdrop__img"
         />

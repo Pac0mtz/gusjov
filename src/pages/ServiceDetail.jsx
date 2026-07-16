@@ -360,7 +360,13 @@ export default function ServiceDetail() {
       />
 
       <section className="relative isolate overflow-hidden bg-charcoal-950 pb-12 pt-28 sm:pb-16 sm:pt-36">
-        <HeroBackdrop key={service.slug} src={`${heroImg.src}.jpg`} webp={`${heroImg.src}.webp`} priority />
+        <HeroBackdrop
+          key={service.slug}
+          src={`${heroImg.src}.jpg`}
+          webp={`${heroImg.src}.webp`}
+          priority
+          pan={false}
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950 via-charcoal-950/75 to-charcoal-950/30" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950/85 via-charcoal-950/45 to-transparent" />
 

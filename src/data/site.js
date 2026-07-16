@@ -74,9 +74,11 @@ export const serviceImages = {
   'general-flooring': {
     src: '/images/gallery/hardwood-installation/driftwood-oak-empty-room',
     alt: 'Light driftwood oak hardwood flooring in an empty Chicago-area room',
+    // Prefer landscape / wider sources for full-bleed heroes (portrait gallery
+    // shots are only ~650–900px wide and look soft on desktop).
     hero: {
-      src: '/images/gallery/hardwood-installation/light-oak-open-concept-arches',
-      alt: 'Light oak hardwood flooring through an open-concept living area with arched entryways',
+      src: '/images/gallery/hardwood-installation/dark-oak-diagonal-inlay-purple-room',
+      alt: 'Dark-stained diagonal hardwood with a light wood inlay border in a purple room',
     },
     section: {
       src: '/images/gallery/hardwood-installation/natural-oak-plank-empty-room',
@@ -87,8 +89,8 @@ export const serviceImages = {
     src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
     alt: 'Warm honey oak hardwood planks newly installed in an empty room',
     hero: {
-      src: '/images/gallery/hardwood-installation/glossy-acacia-hardwood-renovation',
-      alt: 'Glossy multi-tonal acacia hardwood flooring during a home renovation',
+      src: '/images/hero-solid-oak',
+      alt: 'Solid oak hardwood flooring in a bright finished room',
     },
     section: {
       src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
@@ -111,8 +113,8 @@ export const serviceImages = {
     src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
     alt: 'Freshly finished espresso-stained hardwood with a high-gloss coat',
     hero: {
-      src: '/images/gallery/hardwood-refinishing/natural-oak-gloss-long-room',
-      alt: 'Natural oak hardwood with a high-gloss finish in a long upper-level room',
+      src: '/images/gallery/hardwood-refinishing/natural-oak-sanded-room',
+      alt: 'Freshly sanded natural red oak hardwood floor',
     },
     section: {
       src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
@@ -123,8 +125,8 @@ export const serviceImages = {
     src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
     alt: 'Engineered hardwood flooring installed in a residential hallway',
     hero: {
-      src: '/images/gallery/hardwood-installation/variegated-acacia-hardwood-kitchen',
-      alt: 'High-contrast variegated acacia hardwood flooring near a kitchen island',
+      src: '/images/hero-hallway',
+      alt: 'Hardwood flooring running through a residential hallway',
     },
     section: {
       src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',

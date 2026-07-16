@@ -183,16 +183,21 @@
 .hero-backdrop__img {
   display: block;
   height: 100%;
-  width: 128%;
+  width: 100%;
   max-width: none;
   object-fit: cover;
   object-position: center center;
   transform: translate3d(0, 0, 0);
+}
+
+/* Extra width only when we have room to pan — keeps gallery shots from upscaling past the viewport. */
+.hero-backdrop--pan .hero-backdrop__img {
+  width: 112%;
   will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-backdrop__img {
+  .hero-backdrop--pan .hero-backdrop__img {
     width: 100%;
     transform: none !important;
   }

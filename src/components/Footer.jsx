@@ -111,14 +111,16 @@ export default function Footer() {
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>
-          {/*
-            TODO(gusjov): if you are licensed and/or insured, say so here and add
-            the licence number — it is a strong local trust signal. Left blank on
-            purpose: it was not stated anywhere in the WordPress site, and it is
-            not a claim to make on your behalf without confirmation.
-          */}
-          <p className="hidden sm:block">
-            Hardwood flooring installation, refinishing &amp; laminate — Chicago area.
+          <p>
+            Designed by{' '}
+            <a
+              href="https://webprochicago.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-charcoal-300 transition hover:text-ember-400"
+            >
+              Web Pro Chicago
+            </a>
           </p>
         </div>
       </div>

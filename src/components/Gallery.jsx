@@ -1,15 +1,41 @@
 import { useCallback, useEffect, useState } from 'react'
 import { allPhotos, categories } from '../data/gallery'
 
+/** Columns at each breakpoint — keep in sync with the grid classes below. */
+function useGalleryCols() {
+  const [cols, setCols] = useState(2)
+
+  useEffect(() => {
+    const md = window.matchMedia('(min-width: 768px)')
+    const lg = window.matchMedia('(min-width: 1024px)')
+    const update = () => setCols(lg.matches ? 4 : md.matches ? 3 : 2)
+    update()
+    md.addEventListener('change', update)
+    lg.addEventListener('change', update)
+    return () => {
+      md.removeEventListener('change', update)
+      lg.removeEventListener('change', update)
+    }
+  }, [])
+
+  return cols
+}
+
 /**
  * Category-filtered gallery with a lightbox.
  * Photos live in per-category folders; see src/data/gallery.js.
+ * Pass `rows={0}` to show every photo with no expand control.
  */
-export default function Gallery({ initial = 'all' }) {
+export default function Gallery({ initial = 'all', rows = 3 }) {
   const [active, setActive] = useState(initial)
   const [index, setIndex] = useState(-1)
+  const [expanded, setExpanded] = useState(false)
+  const cols = useGalleryCols()
 
   const shown = active === 'all' ? allPhotos : allPhotos.filter((p) => p.category === active)
+  const limit = rows > 0 ? cols * rows : shown.length
+  const hasMore = rows > 0 && shown.length > limit
+  const visible = expanded || !hasMore ? shown : shown.slice(0, limit)
   const open = index >= 0 && index < shown.length
 
   const close = useCallback(() => setIndex(-1), [])
@@ -47,6 +73,7 @@ export default function Gallery({ initial = 'all' }) {
               onClick={() => {
                 setActive(f.slug)
                 setIndex(-1)
+                setExpanded(false)
               }}
               aria-pressed={isActive}
               className={`rounded-full px-5 py-2.5 text-sm font-medium transition ${
@@ -65,34 +92,50 @@ export default function Gallery({ initial = 'all' }) {
       </div>
 
       <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {shown.map((photo, i) => (
-          <li key={`${photo.category}-${photo.slug}`}>
-            <button
-              type="button"
-              onClick={() => setIndex(i)}
-              className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card"
-              aria-label={`View larger: ${photo.alt}`}
-            >
-              <picture>
-                <source srcSet={photo.thumb} type="image/webp" />
-                <img
-                  src={photo.thumbFallback}
-                  alt={photo.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width="600"
-                  height="800"
-                  className="aspect-[4/3] h-full w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-[3/4]"
-                />
-              </picture>
-              <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-              <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-left text-xs font-medium text-white opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
-                {photo.categoryTitle}
-              </span>
-            </button>
-          </li>
-        ))}
+        {visible.map((photo) => {
+          const i = shown.indexOf(photo)
+          return (
+            <li key={`${photo.category}-${photo.slug}`}>
+              <button
+                type="button"
+                onClick={() => setIndex(i)}
+                className="group relative block w-full overflow-hidden rounded-xl bg-charcoal-100 shadow-card"
+                aria-label={`View larger: ${photo.alt}`}
+              >
+                <picture>
+                  <source srcSet={photo.thumb} type="image/webp" />
+                  <img
+                    src={photo.thumbFallback}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width="600"
+                    height="800"
+                    className="aspect-[4/3] h-full w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-[3/4]"
+                  />
+                </picture>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-left text-xs font-medium text-white opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
+                  {photo.categoryTitle}
+                </span>
+              </button>
+            </li>
+          )
+        })}
       </ul>
+
+      {hasMore && (
+        <div className="mt-8 text-center sm:mt-10">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="btn-dark"
+            aria-expanded={expanded}
+          >
+            {expanded ? 'Show fewer photos' : `See more photos (${shown.length - limit})`}
+          </button>
+        </div>
+      )}
 
       {shown.length === 0 && (
         <p className="mt-10 text-center text-charcoal-500">No photos in this category yet.</p>

@@ -43,7 +43,7 @@ export default function Home() {
       />
 
       {/* ---------- Hero ---------- */}
-      <section className="relative isolate flex h-[100svh] max-h-[100svh] items-end overflow-hidden bg-charcoal-950 sm:h-auto sm:min-h-[92vh] sm:max-h-none sm:items-center">
+      <section className="relative isolate flex h-[100svh] max-h-[100svh] items-center overflow-hidden bg-charcoal-950 sm:h-auto sm:min-h-[92vh] sm:max-h-none">
         <picture>
           <source
             srcSet="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.webp"
@@ -61,50 +61,46 @@ export default function Home() {
           />
         </picture>
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/85 to-charcoal-950/40" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950 via-charcoal-950/55 to-charcoal-950/20 sm:via-transparent sm:to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/45 to-charcoal-950/25 sm:from-charcoal-950 sm:via-transparent sm:to-transparent" />
 
-        <div className="container-content w-full pb-7 pt-24 sm:pb-16 sm:pt-32">
-          <div className="max-w-2xl">
+        <div className="container-content w-full py-8 pt-24 sm:pb-16 sm:pt-32">
+          <div className="flex max-w-2xl flex-col justify-center">
             <p className="eyebrow animate-fade-up">{site.name}</p>
-            <h1 className="mt-2 max-w-[16ch] text-[1.85rem] font-extrabold leading-[1.08] text-white animate-fade-up sm:mt-4 sm:max-w-none sm:text-6xl md:text-7xl">
+            <h1 className="mt-3 text-[2.75rem] font-extrabold leading-[1.05] text-white animate-fade-up sm:mt-4 sm:text-6xl md:text-7xl">
               Great Prices,{' '}
               <span className="text-ember-400">Honest Service</span> &amp; Stunning Results
             </h1>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-charcoal-200 animate-fade-up text-pretty sm:mt-7 sm:max-w-xl sm:text-lg">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-charcoal-200 animate-fade-up text-pretty sm:mt-7 sm:text-lg">
               Our goal then and now is to provide quality &amp; affordable hardwood flooring
               services across the Chicago area.
             </p>
-            <div className="mt-5 flex flex-row flex-wrap gap-2.5 animate-fade-up sm:mt-10 sm:gap-3">
-              <Link to="/quote" className="btn-primary !px-5 !py-2.5 text-xs sm:!px-6 sm:!py-3 sm:text-sm">
+            <div className="mt-9 flex flex-row flex-wrap gap-3 animate-fade-up sm:mt-12">
+              <Link to="/quote" className="btn-primary">
                 Get Free Quote
               </Link>
-              <Link to="/contact" className="btn-ghost !px-5 !py-2.5 text-xs sm:!px-6 sm:!py-3 sm:text-sm">
+              <Link to="/contact" className="btn-ghost">
                 Get In Touch
               </Link>
             </div>
 
-            <dl className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-2 border-t border-white/10 pt-4 sm:mt-14 sm:gap-x-10 sm:gap-y-5 sm:pt-8">
+            <dl className="mt-7 flex flex-wrap items-end gap-x-8 gap-y-3 border-t border-white/10 pt-5 sm:mt-14 sm:gap-x-10 sm:pt-8">
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-charcoal-400 sm:text-xs">
-                  Call us
-                </dt>
+                <dt className="text-xs uppercase tracking-widest text-charcoal-400">Call us</dt>
                 <dd>
                   <a
                     href={site.phoneHref}
-                    className="font-display text-lg font-bold text-white transition hover:text-ember-400 sm:text-2xl"
+                    className="font-display text-xl font-bold text-white transition hover:text-ember-400 sm:text-2xl"
                   >
                     {site.phone}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-[10px] uppercase tracking-widest text-charcoal-400 sm:text-xs">
-                  Email
-                </dt>
+                <dt className="text-xs uppercase tracking-widest text-charcoal-400">Email</dt>
                 <dd>
                   <a
                     href={site.emailHref}
-                    className="text-sm font-medium text-white transition hover:text-ember-400 sm:text-lg"
+                    className="text-base font-medium text-white transition hover:text-ember-400 sm:text-lg"
                   >
                     {site.email}
                   </a>

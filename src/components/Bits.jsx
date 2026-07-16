@@ -44,6 +44,76 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
   )
 }
 
+/**
+ * Cropped image that pans from bottom → up as it moves through the viewport.
+ * Uses JS (not CSS view timelines) so it still works inside transformed Reveal parents.
+ */
+export function ScrollPanImage({
+  src,
+  webp,
+  alt,
+  width,
+  height,
+  className = '',
+}) {
+  const frameRef = useRef(null)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    const frame = frameRef.current
+    const img = imgRef.current
+    if (!frame || !img) return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (reduce.matches) return
+
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const rect = frame.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      // 0 = entering viewport from below, 1 = exiting through the top
+      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)))
+      const frameH = frame.clientHeight || 1
+      // offsetHeight ignores transform, so travel stays stable while panning
+      const imgH = img.offsetHeight || frameH * 1.55
+      const travel = Math.max(0, imgH - frameH)
+      // Bottom-anchored: positive Y reveals the upper part of the photo
+      img.style.transform = `translate3d(0, ${progress * travel}px, 0)`
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    img.addEventListener('load', update)
+
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null
+    ro?.observe(frame)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('scroll', onScroll, { capture: true })
+      window.removeEventListener('resize', onScroll)
+      img.removeEventListener('load', update)
+      ro?.disconnect()
+    }
+  }, [])
+
+  return (
+    <div ref={frameRef} className={`image-scroll-frame ${className}`}>
+      <picture>
+        {webp ? <source srcSet={webp} type="image/webp" /> : null}
+        <img ref={imgRef} src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+      </picture>
+    </div>
+  )
+}
+
 export function SectionHeading({ eyebrow, title, body, align = 'center', light = false }) {
   const centered = align === 'center'
   return (

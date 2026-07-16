@@ -75,7 +75,7 @@ export const photos = {
     { slug: 'honey-oak-plank-empty-room', alt: 'Warm honey oak hardwood planks newly installed in an empty room', w: 1050, h: 1400 },
     { slug: 'dark-oak-diagonal-inlay-purple-room', alt: 'Dark-stained diagonal hardwood with a light wood inlay border in a purple room', w: 1400, h: 788 },
     { slug: 'dark-oak-diagonal-inlay-border', alt: 'Custom dark hardwood floor with diagonal center field and light wood border inlay', w: 1400, h: 788 },
-    { slug: 'light-oak-open-concept-arches', alt: 'Light oak hardwood flooring through an open-concept living area with arched entryways', w: 788, h: 1400 },
+    { slug: 'light-oak-open-concept-arches', alt: 'Light oak hardwood flooring through an open-concept living area with arched entryways', w: 756, h: 1400 },
     { slug: 'variegated-acacia-hardwood-kitchen', alt: 'High-contrast variegated acacia hardwood flooring near a kitchen island', w: 788, h: 1400 },
     { slug: 'glossy-acacia-hardwood-renovation', alt: 'Glossy multi-tonal acacia hardwood flooring during a home renovation', w: 788, h: 1400 },
     { slug: 'diagonal-oak-open-concept-columns', alt: 'Diagonal oak hardwood flooring in an open-concept kitchen and living area with white columns', w: 788, h: 1400 },

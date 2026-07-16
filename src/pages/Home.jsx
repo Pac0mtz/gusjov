@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
-import { CtaBand, Counter, Reveal, SectionHeading, ServiceIcon } from '../components/Bits'
+import { CtaBand, Counter, Reveal, ScrollPanImage, SectionHeading, ServiceIcon } from '../components/Bits'
 import BeforeAfter from '../components/BeforeAfter'
 import Gallery from '../components/Gallery'
 import Testimonials from '../components/Testimonials'
@@ -129,18 +129,14 @@ export default function Home() {
       <section className="bg-white py-12 sm:py-20 lg:py-28">
         <div className="container-content grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className="relative">
-            <picture>
-              <source srcSet="/images/gallery/staircases/curved-staircase-dark-stain.webp" type="image/webp" />
-              <img
-                src="/images/gallery/staircases/curved-staircase-dark-stain.jpg"
-                alt="Curved staircase with dark-stained oak treads above a refinished hardwood foyer, completed by Gusjov Flooring"
-                loading="lazy"
-                decoding="async"
-                width="1400"
-                height="1866"
-                className="aspect-[16/10] w-full rounded-2xl object-cover shadow-card sm:aspect-[4/5]"
-              />
-            </picture>
+            <ScrollPanImage
+              className="aspect-square w-full rounded-2xl shadow-card sm:aspect-[4/5]"
+              webp="/images/gallery/hardwood-installation/light-oak-open-concept-arches.webp"
+              src="/images/gallery/hardwood-installation/light-oak-open-concept-arches.jpg"
+              alt="Light oak hardwood flooring through an open-concept living area with arched entryways, completed by Gusjov Flooring"
+              width={756}
+              height={1400}
+            />
             <div className="absolute -bottom-4 -right-2 rounded-xl bg-ember-500 px-3.5 py-2.5 text-white shadow-lift sm:-bottom-5 sm:-right-3 sm:rounded-2xl sm:px-7 sm:py-6">
               <p className="font-display text-2xl font-extrabold leading-none sm:text-4xl">12</p>
               <p className="mt-0.5 text-[9px] font-semibold uppercase leading-tight tracking-widest sm:mt-1 sm:text-xs">

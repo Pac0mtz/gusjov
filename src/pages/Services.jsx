@@ -67,14 +67,14 @@ export default function Services() {
                   >
                     <div className="relative aspect-[16/10] overflow-hidden bg-charcoal-100">
                       <picture>
-                        <source srcSet={`${img.src}-thumb.webp`} type="image/webp" />
+                        <source srcSet={`${img.src}.webp`} type="image/webp" />
                         <img
-                          src={`${img.src}-thumb.jpg`}
+                          src={`${img.src}.jpg`}
                           alt={img.alt}
                           loading={i < 2 ? 'eager' : 'lazy'}
                           decoding="async"
-                          width="480"
-                          height="300"
+                          width="900"
+                          height="560"
                           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                           className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                         />

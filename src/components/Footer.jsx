@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { nav, site, services } from '../data/site'
+import { nav, servicePath, site, services } from '../data/site'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -70,7 +70,7 @@ export default function Footer() {
               {services.map((s) => (
                 <li key={s.slug}>
                   <Link
-                    to={`/services#${s.slug}`}
+                    to={servicePath(s.slug)}
                     className="text-sm text-charcoal-300 transition hover:text-ember-400"
                   >
                     {s.title}

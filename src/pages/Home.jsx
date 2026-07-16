@@ -9,6 +9,7 @@ import {
   consultationCopy,
   introCopy,
   serviceImages,
+  servicePath,
   services,
   site,
   specializationCopy,
@@ -190,7 +191,7 @@ export default function Home() {
                 <Reveal key={s.slug} as="li" className="h-full" delay={Math.min(i, 5) * 70}>
                   <article className="group flex h-full overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 ease-unveil hover:-translate-y-1.5 hover:shadow-lift">
                     <Link
-                      to={`/services#${s.slug}`}
+                      to={servicePath(s.slug)}
                       className={`flex h-full min-h-[13.5rem] w-full sm:min-h-[25rem] sm:flex-col ${
                         imageRight ? 'flex-row-reverse sm:flex-col' : ''
                       }`}

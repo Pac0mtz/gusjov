@@ -13,7 +13,15 @@ import { allPhotos, beforeAfterPairs, categories } from '../src/data/gallery.js'
 import { googleProfile } from '../src/data/reviews.js'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
-const routes = new Set(['/', '/about', '/services', '/projects', '/contact', '/quote'])
+const routes = new Set([
+  '/',
+  '/about',
+  '/services',
+  ...services.map((s) => `/services/${s.slug}`),
+  '/projects',
+  '/contact',
+  '/quote',
+])
 let problems = 0
 const fail = (msg) => {
   problems++
@@ -37,9 +45,10 @@ for (const item of nav) {
 ok(`nav (${nav.length}) points at real routes`)
 
 for (const s of services) {
-  const hashRoute = `/services#${s.slug}`
+  const path = `/services/${s.slug}`
   if (!serviceImages[s.slug]) fail(`serviceImages missing for ${s.slug}`)
-  ok(`service deep link ${hashRoute}`)
+  if (!routes.has(path)) fail(`service route missing ${path}`)
+  ok(`service page ${path}`)
 }
 
 const asset = (p) => {

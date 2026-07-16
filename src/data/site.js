@@ -98,8 +98,8 @@ export const serviceImages = {
 }
 
 // --- verified: the six icon-box widgets on the home page. Titles and the
-// short blurbs are the original copy. `detail` is expanded copy written from
-// those same facts for the services page -- no new claims are introduced.
+// short blurbs are the original copy. `detail` / `points` are expanded from
+// those same facts for the service pages -- no new claims are introduced.
 export const services = [
   {
     slug: 'general-flooring',
@@ -107,6 +107,11 @@ export const services = [
     blurb: 'All hardwood types and textures for every room.',
     detail:
       'Whatever is underfoot now, we can work with it. We handle hardwood in every common species and texture, from tight-grain strip oak to wide-plank boards, and we will tell you honestly whether your floor wants a repair, a refinish or a full replacement.',
+    points: [
+      'Hardwood in every common species and texture',
+      'Strip oak through wide-plank boards',
+      'Honest call on repair, refinish, or replace',
+    ],
     icon: 'plank',
   },
   {
@@ -115,6 +120,11 @@ export const services = [
     blurb: 'New installs or full replacements, start to finish.',
     detail:
       'New construction or tearing out what is already there. We handle the whole job: removal and disposal of the old floor, subfloor prep, layout, installation and trim, so the finished floor sits flat and clean against your baseboards.',
+    points: [
+      'Old floor removal and disposal',
+      'Subfloor prep, layout, and install',
+      'Trim finished clean against baseboards',
+    ],
     icon: 'hammer',
   },
   {
@@ -123,6 +133,11 @@ export const services = [
     blurb: 'Durable laminate in many textures, built to last.',
     detail:
       'Laminate earns its keep in basements, rentals and high-traffic rooms where solid hardwood is not the right call. It stands up to scratches, spills and kids, and modern textures read convincingly like real wood.',
+    points: [
+      'Strong fit for basements, rentals, and high traffic',
+      'Stands up to scratches, spills, and kids',
+      'Modern textures that read like real wood',
+    ],
     icon: 'layers',
   },
   {
@@ -131,6 +146,11 @@ export const services = [
     blurb: 'Fresh coats that hide scratches, dents and wear.',
     detail:
       'Most tired floors do not need replacing. Sanding back to bare wood and laying down a fresh stain and protective coat brings a scratched, dull floor back, usually for a fraction of what new flooring costs.',
+    points: [
+      'Sand back to bare wood',
+      'Fresh stain and protective coat',
+      'Usually a fraction of replacement cost',
+    ],
     icon: 'sparkle',
   },
   {
@@ -139,6 +159,11 @@ export const services = [
     blurb: 'Glued engineered hardwood with a clean finished look.',
     detail:
       'Engineered hardwood gives you a real wood wear layer over a stable core, so it copes with concrete slabs and below-grade rooms where solid hardwood would move. Glue-down installation keeps it quiet and solid underfoot.',
+    points: [
+      'Real wood wear layer over a stable core',
+      'Works on concrete slabs and below-grade rooms',
+      'Glue-down install — quiet and solid underfoot',
+    ],
     icon: 'grid',
   },
   {
@@ -147,9 +172,21 @@ export const services = [
     blurb: 'Hardwood choices for residential and commercial spaces.',
     detail:
       'Choosing species, stain and layout is the part most people find hardest. We bring samples, talk through how each option lives with your light, your rooms and your traffic, and help you land on a floor you will still like in ten years.',
+    points: [
+      'Samples for species, stain, and layout',
+      'Matched to your light, rooms, and traffic',
+      'A floor you will still like in ten years',
+    ],
     icon: 'palette',
   },
 ]
+
+export const getService = (slug) => services.find((s) => s.slug === slug) || null
+
+export const servicePath = (slug) => `/services/${slug}`
+
+export const serviceMetaDescription = (service) =>
+  `${service.blurb} Serving Chicago and suburbs. Free estimates from Gusjov Flooring — call (773) 986-2691.`
 
 // --- verified: home page "Our Specialization" body copy ---
 export const specializationCopy =

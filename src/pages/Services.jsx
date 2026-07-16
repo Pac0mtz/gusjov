@@ -54,7 +54,7 @@ export default function Services() {
       />
 
       {/* Fast hub grid — each card is a real page */}
-      <section className="bg-white py-10 sm:py-16 lg:py-20">
+      <section className="section-pad bg-white">
         <div className="container-content">
           <ul className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {services.map((s, i) => {
@@ -108,7 +108,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-charcoal-50 py-12 sm:py-20 lg:py-24">
+      <section className="section-pad bg-charcoal-50">
         <div className="container-content">
           <SectionHeading
             eyebrow="Why Choose Us"

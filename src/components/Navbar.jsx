@@ -10,13 +10,12 @@ export default function Navbar() {
   useEffect(() => setOpen(false), [pathname])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => {
@@ -24,12 +23,15 @@ export default function Navbar() {
     }
   }, [open])
 
+  // Solid light bar once you leave the dark hero — fixes the black strip on white pages.
+  const onLight = scrolled || open
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition duration-300 ${
-        scrolled || open
-          ? 'bg-charcoal-950/95 shadow-lift backdrop-blur-md'
-          : 'bg-gradient-to-b from-charcoal-950/80 to-transparent'
+        onLight
+          ? 'border-b border-charcoal-200/80 bg-white/95 shadow-card backdrop-blur-md'
+          : 'bg-gradient-to-b from-charcoal-950/85 via-charcoal-950/40 to-transparent'
       }`}
     >
       <a
@@ -39,56 +41,73 @@ export default function Navbar() {
         Skip to content
       </a>
 
-      <div className="container-content flex h-20 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3" aria-label={`${site.name} — home`}>
+      <div className="container-content flex h-16 items-center justify-between gap-4 sm:h-20">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3" aria-label={`${site.name} — home`}>
           <img
             src={site.logo}
             alt=""
             width="44"
             height="44"
-            className="h-11 w-11 shrink-0"
+            className="h-9 w-9 shrink-0 sm:h-11 sm:w-11"
             aria-hidden="true"
           />
-          <span className="hidden font-display text-lg font-bold leading-tight text-white sm:block">
-            Gusjov <span className="text-ember-400">Flooring</span>
+          <span
+            className={`hidden font-display text-lg font-bold leading-tight sm:block ${
+              onLight ? 'text-charcoal-900' : 'text-white'
+            }`}
+          >
+            Gusjov <span className="text-ember-500">Flooring</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main">
           {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
-              className={({ isActive }) =>
-                `rounded-full px-4 py-2 text-sm font-medium transition ${
-                  isActive
-                    ? 'text-ember-400'
-                    : 'text-charcoal-100 hover:bg-white/5 hover:text-white'
+              className={({ isActive }) => {
+                const active =
+                  isActive || (item.to === '/services' && pathname.startsWith('/services/'))
+                if (onLight) {
+                  return `rounded-full px-4 py-2 text-sm font-medium transition ${
+                    active
+                      ? 'bg-ember-50 text-ember-700'
+                      : 'text-charcoal-700 hover:bg-charcoal-50 hover:text-charcoal-900'
+                  }`
+                }
+                return `rounded-full px-4 py-2 text-sm font-medium transition ${
+                  active ? 'text-ember-400' : 'text-charcoal-100 hover:bg-white/5 hover:text-white'
                 }`
-              }
+              }}
             >
               {item.label}
             </NavLink>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={site.phoneHref}
-            className="hidden items-center gap-2 text-sm font-semibold text-white transition hover:text-ember-400 md:flex"
+            className={`hidden items-center gap-2 text-sm font-semibold transition md:flex ${
+              onLight ? 'text-charcoal-800 hover:text-ember-600' : 'text-white hover:text-ember-400'
+            }`}
           >
-            <PhoneIcon className="h-4 w-4 text-ember-400" />
+            <PhoneIcon className={`h-4 w-4 ${onLight ? 'text-ember-600' : 'text-ember-400'}`} />
             {site.phone}
           </a>
-          <Link to="/contact" className="btn-primary hidden sm:inline-flex">
+          <Link to="/contact" className="btn-primary hidden !px-5 !py-2.5 sm:inline-flex">
             Get a Free Estimate
           </Link>
 
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-white transition hover:bg-white/10 lg:hidden"
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-lg transition lg:hidden ${
+              onLight
+                ? 'text-charcoal-900 hover:bg-charcoal-100'
+                : 'text-white hover:bg-white/10'
+            }`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -101,25 +120,27 @@ export default function Navbar() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-t border-white/10 bg-charcoal-950 lg:hidden"
+        className="border-t border-charcoal-100 bg-white lg:hidden"
       >
-        <nav className="container-content flex flex-col py-4" aria-label="Mobile">
+        <nav className="container-content flex flex-col py-3" aria-label="Mobile">
           {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/'}
-              className={({ isActive }) =>
-                `border-b border-white/5 py-3.5 text-base font-medium transition ${
-                  isActive ? 'text-ember-400' : 'text-charcoal-100'
+              className={({ isActive }) => {
+                const active =
+                  isActive || (item.to === '/services' && pathname.startsWith('/services/'))
+                return `border-b border-charcoal-100 py-3.5 text-base font-medium transition ${
+                  active ? 'text-ember-600' : 'text-charcoal-800'
                 }`
-              }
+              }}
             >
               {item.label}
             </NavLink>
           ))}
-          <div className="mt-5 flex flex-col gap-3">
-            <a href={site.phoneHref} className="btn-ghost w-full">
+          <div className="mt-5 flex flex-col gap-3 pb-2">
+            <a href={site.phoneHref} className="btn-ghost w-full !border-charcoal-300 !text-charcoal-800">
               <PhoneIcon className="h-4 w-4" />
               {site.phone}
             </a>

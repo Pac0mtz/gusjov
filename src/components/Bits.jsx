@@ -45,6 +45,72 @@ export function Reveal({ children, className = '', delay = 0, as: Tag = 'div' })
 }
 
 /**
+ * Full-bleed hero backdrop that pans horizontally as the section scrolls.
+ * Image is wider than the frame; travel is scroll-linked.
+ */
+export function HeroBackdrop({ src, webp, priority = false }) {
+  const frameRef = useRef(null)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    const frame = frameRef.current
+    const img = imgRef.current
+    if (!frame || !img) return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (reduce.matches) return
+
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const rect = frame.getBoundingClientRect()
+      const span = Math.max(rect.height * 0.85, 1)
+      const progress = Math.min(1, Math.max(0, -rect.top / span))
+      const frameW = frame.clientWidth || 1
+      const imgW = img.offsetWidth || frameW * 1.28
+      const travel = Math.max(0, imgW - frameW)
+      img.style.transform = `translate3d(${-progress * travel}px, 0, 0)`
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    img.addEventListener('load', update)
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null
+    ro?.observe(frame)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('scroll', onScroll, { capture: true })
+      window.removeEventListener('resize', onScroll)
+      img.removeEventListener('load', update)
+      ro?.disconnect()
+    }
+  }, [src])
+
+  return (
+    <div ref={frameRef} className="hero-backdrop" aria-hidden="true">
+      <picture>
+        {webp ? <source srcSet={webp} type="image/webp" /> : null}
+        <img
+          ref={imgRef}
+          src={src}
+          alt=""
+          fetchpriority={priority ? 'high' : undefined}
+          decoding="async"
+          className="hero-backdrop__img"
+        />
+      </picture>
+    </div>
+  )
+}
+
+/**
  * Cropped image that pans from bottom → up as it moves through the viewport.
  * Uses JS (not CSS view timelines) so it still works inside transformed Reveal parents.
  */
@@ -117,7 +183,7 @@ export function ScrollPanImage({
 export function SectionHeading({ eyebrow, title, body, align = 'center', light = false }) {
   const centered = align === 'center'
   return (
-    <Reveal className={`max-w-2xl ${centered ? 'mx-auto text-center' : ''}`}>
+    <Reveal className={`measure-narrow ${centered ? 'mx-auto text-center' : ''}`}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2
         className={`mt-3 text-3xl font-bold leading-[1.15] sm:text-4xl md:text-[2.75rem] ${
@@ -205,8 +271,8 @@ export function CtaBand({
       </picture>
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/90 to-charcoal-950/60" />
 
-      <div className="container-content py-20 sm:py-24">
-        <Reveal className="max-w-2xl">
+      <div className="container-content section-pad">
+        <Reveal className="measure-narrow">
           <p className="eyebrow">Contact us</p>
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{title}</h2>
           <p className="mt-5 text-base leading-relaxed text-charcoal-300 text-pretty">{body}</p>
@@ -227,7 +293,7 @@ export function CtaBand({
 /** Page header used on every interior route. */
 export function PageHero({ eyebrow, title, body }) {
   return (
-    <section className="relative isolate overflow-hidden bg-charcoal-950 pb-16 pt-36 sm:pb-20 sm:pt-44">
+    <section className="relative isolate overflow-hidden bg-charcoal-950 pb-14 pt-32 sm:pb-20 sm:pt-40">
       <picture>
         <source srcSet="/images/hero-solid-oak.webp" type="image/webp" />
         <img
@@ -243,11 +309,11 @@ export function PageHero({ eyebrow, title, body }) {
 
       <div className="container-content">
         <p className="eyebrow animate-fade-up">{eyebrow}</p>
-        <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-[1.1] text-white animate-fade-up sm:text-5xl md:text-6xl">
+        <h1 className="measure mt-3 text-4xl font-extrabold leading-[1.1] text-white animate-fade-up sm:text-5xl md:text-6xl">
           {title}
         </h1>
         {body && (
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-charcoal-300 animate-fade-up text-pretty">
+          <p className="measure-narrow mt-5 text-base leading-relaxed text-charcoal-300 animate-fade-up text-pretty sm:mt-6 sm:text-lg">
             {body}
           </p>
         )}

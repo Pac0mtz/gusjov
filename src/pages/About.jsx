@@ -26,8 +26,8 @@ export default function About() {
       />
 
       {/* ---------- Story ---------- */}
-      <section className="bg-white py-20 sm:py-28">
-        <div className="container-content grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
+      <section className="section-pad bg-white">
+        <div className="container-content grid items-start gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="relative">
             <picture>
               <source srcSet="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-entryway.webp" type="image/webp" />
@@ -65,7 +65,7 @@ export default function About() {
       </section>
 
       {/* ---------- Stats ---------- */}
-      <section className="bg-charcoal-950 py-20">
+      <section className="section-pad bg-charcoal-950">
         <div className="container-content">
           <dl className="grid grid-cols-1 gap-12 sm:grid-cols-3">
             {stats.map((s) => (
@@ -76,7 +76,7 @@ export default function About() {
       </section>
 
       {/* ---------- What we offer ---------- */}
-      <section className="bg-charcoal-50 py-20 sm:py-28">
+      <section className="section-pad bg-charcoal-50">
         <div className="container-content">
           <SectionHeading
             eyebrow="What We Offer"
@@ -95,9 +95,9 @@ export default function About() {
       </section>
 
       {/* ---------- Consultation ---------- */}
-      <section className="bg-white py-20 sm:py-24">
+      <section className="section-pad bg-white">
         <div className="container-content">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="measure-center text-center">
             <SectionHeading eyebrow="Get in touch" title="Get your free consultation" body={consultationCopy} />
             <a
               href={site.phoneHref}

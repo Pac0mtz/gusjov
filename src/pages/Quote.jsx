@@ -39,8 +39,8 @@ export default function Quote() {
         body="A few quick questions so we can come back with an accurate number — not a guess."
       />
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="container-content grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+      <section className="section-pad bg-white">
+        <div className="container-content grid gap-8 sm:gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           {/* ---- How it works ---- */}
           <div>
             <h2 className="text-2xl font-bold text-charcoal-900 sm:text-3xl">How it works</h2>

@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import WelcomeSplash from './components/WelcomeSplash'
 import Home from './pages/Home'
 
 // Home ships in the main bundle; the rest split out.
@@ -43,6 +44,7 @@ function ScrollToTop() {
 export default function App() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
+      <WelcomeSplash />
       <ScrollToTop />
       <Navbar />
       <main id="main" className="flex-1">

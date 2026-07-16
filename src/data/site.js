@@ -68,32 +68,80 @@ export const stats = [
   { value: 230, suffix: '+', label: 'Projects' },
 ]
 
-// Photos that show each service — used on Home cards and the Services page.
-// Each slug must point at a unique file (no repeats across the six).
+// Photos per service. `src`/`alt` = Home + Services cards.
+// `hero` and `section` are always different images for the detail page.
 export const serviceImages = {
   'general-flooring': {
     src: '/images/gallery/hardwood-installation/driftwood-oak-empty-room',
     alt: 'Light driftwood oak hardwood flooring in an empty Chicago-area room',
+    hero: {
+      src: '/images/gallery/hardwood-installation/light-oak-open-concept-arches',
+      alt: 'Light oak hardwood flooring through an open-concept living area with arched entryways',
+    },
+    section: {
+      src: '/images/gallery/hardwood-installation/natural-oak-plank-empty-room',
+      alt: 'Natural light oak hardwood planks in an empty room with a window',
+    },
   },
   'floor-installation': {
     src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
     alt: 'Warm honey oak hardwood planks newly installed in an empty room',
+    hero: {
+      src: '/images/gallery/hardwood-installation/glossy-acacia-hardwood-renovation',
+      alt: 'Glossy multi-tonal acacia hardwood flooring during a home renovation',
+    },
+    section: {
+      src: '/images/gallery/hardwood-installation/honey-oak-plank-empty-room',
+      alt: 'Warm honey oak hardwood planks newly installed in an empty room',
+    },
   },
   'laminated-floors': {
     src: '/images/gallery/laminate-flooring/grey-plank-hallway-entry',
     alt: 'Grey wood-look laminate plank flooring running down a hallway to a front door',
+    hero: {
+      src: '/images/gallery/laminate-flooring/laminate-plank-basement-open',
+      alt: 'Laminate plank flooring across an open finished basement',
+    },
+    section: {
+      src: '/images/gallery/laminate-flooring/laminate-plank-basement-lounge',
+      alt: 'Oak-look laminate flooring in a basement lounge area',
+    },
   },
   'floor-refinishing': {
     src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
     alt: 'Freshly finished espresso-stained hardwood with a high-gloss coat',
+    hero: {
+      src: '/images/gallery/hardwood-refinishing/natural-oak-gloss-long-room',
+      alt: 'Natural oak hardwood with a high-gloss finish in a long upper-level room',
+    },
+    section: {
+      src: '/images/gallery/hardwood-refinishing/espresso-hardwood-gloss-finish',
+      alt: 'Freshly finished espresso-stained hardwood with a high-gloss coat reflecting a window',
+    },
   },
   'glued-engineered': {
     src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
     alt: 'Engineered hardwood flooring installed in a residential hallway',
+    hero: {
+      src: '/images/gallery/hardwood-installation/variegated-acacia-hardwood-kitchen',
+      alt: 'High-contrast variegated acacia hardwood flooring near a kitchen island',
+    },
+    section: {
+      src: '/images/gallery/hardwood-installation/engineered-hardwood-hallway',
+      alt: 'Engineered hardwood flooring installed in a residential hallway',
+    },
   },
   'interior-design': {
     src: '/images/gallery/hardwood-installation/diagonal-oak-open-concept-columns',
     alt: 'Diagonal oak hardwood flooring in an open-concept kitchen and living area',
+    hero: {
+      src: '/images/gallery/hardwood-installation/dark-oak-diagonal-inlay-border',
+      alt: 'Custom dark hardwood floor with diagonal center field and light wood border inlay',
+    },
+    section: {
+      src: '/images/gallery/hardwood-installation/two-tone-hardwood-center-path',
+      alt: 'Two-tone hardwood floor with a medium-brown center path bordered by dark planks',
+    },
   },
 }
 
@@ -107,12 +155,23 @@ export const services = [
     blurb: 'All hardwood types and textures for every room.',
     detail:
       'Whatever is underfoot now, we can work with it. We handle hardwood in every common species and texture, from tight-grain strip oak to wide-plank boards, and we will tell you honestly whether your floor wants a repair, a refinish or a full replacement.',
+    body: [
+      'Whatever is underfoot now, we can work with it. Across Chicago-area homes we handle hardwood in every common species and texture — tight-grain strip oak, wider planks, and the finishes people actually live with day to day.',
+      'The valuable part is the honest call. If a refinish will do, we say so. If a board needs repair, we say that. If the floor is past saving, we will tell you that too — before you spend money on the wrong job.',
+    ],
     points: [
       'Hardwood in every common species and texture',
       'Strip oak through wide-plank boards',
       'Honest call on repair, refinish, or replace',
     ],
+    process: [
+      { title: 'Look at what you have', body: 'We assess the existing floor, the room, and how you use it.' },
+      { title: 'Recommend the right path', body: 'Repair, refinish, or replace — quoted for what the job actually needs.' },
+      { title: 'Finish clean', body: 'The same crew that quotes the work sees it through to a floor that sits right.' },
+    ],
+    idealFor: ['Any room that needs a real hardwood answer', 'Homes unsure whether to refinish or replace', 'Mixed species and textures under one roof'],
     icon: 'plank',
+    layout: 'aside-right',
   },
   {
     slug: 'floor-installation',
@@ -120,12 +179,23 @@ export const services = [
     blurb: 'New installs or full replacements, start to finish.',
     detail:
       'New construction or tearing out what is already there. We handle the whole job: removal and disposal of the old floor, subfloor prep, layout, installation and trim, so the finished floor sits flat and clean against your baseboards.',
+    body: [
+      'Whether you are building new or tearing out what is already there, we run the install as one job — not a handoff between three contractors. Removal, disposal, subfloor prep, layout, installation, and trim stay with us.',
+      'That is how the finished floor sits flat and meets your baseboards cleanly. Over 230 projects in the Chicago area have followed the same end-to-end approach.',
+    ],
     points: [
       'Old floor removal and disposal',
       'Subfloor prep, layout, and install',
       'Trim finished clean against baseboards',
     ],
+    process: [
+      { title: 'Clear the room', body: 'Old flooring comes out and leaves the job — we handle disposal.' },
+      { title: 'Prep and lay out', body: 'Subfloor prep and a careful layout so the boards run true.' },
+      { title: 'Install and trim', body: 'Installation finished with trim that sits clean against the baseboards.' },
+    ],
+    idealFor: ['New construction floors', 'Full room or whole-home replacements', 'Jobs that need one crew from tear-out to trim'],
     icon: 'hammer',
+    layout: 'aside-left',
   },
   {
     slug: 'laminated-floors',
@@ -133,12 +203,23 @@ export const services = [
     blurb: 'Durable laminate in many textures, built to last.',
     detail:
       'Laminate earns its keep in basements, rentals and high-traffic rooms where solid hardwood is not the right call. It stands up to scratches, spills and kids, and modern textures read convincingly like real wood.',
+    body: [
+      'Laminate earns its keep where solid hardwood is not the right call — basements, rentals, and rooms that take a beating from traffic, spills, and kids. You still get a wood-look floor; you get one that is built for that life.',
+      'Modern textures read convincingly like real wood, and we help you pick a product that fits the room instead of fighting it. Free estimates across Chicago and the suburbs.',
+    ],
     points: [
       'Strong fit for basements, rentals, and high traffic',
       'Stands up to scratches, spills, and kids',
       'Modern textures that read like real wood',
     ],
+    process: [
+      { title: 'Match the room', body: 'Basement, rental, or high-traffic — we pick laminate that fits the use.' },
+      { title: 'Choose the look', body: 'Textures that read like real wood without the maintenance of solid hardwood.' },
+      { title: 'Install for daily life', body: 'A finished floor that stands up to scratches, spills, and busy households.' },
+    ],
+    idealFor: ['Basements and below-grade rooms', 'Rentals and high-traffic hallways', 'Homes that want wood look with tougher wear'],
     icon: 'layers',
+    layout: 'image-band',
   },
   {
     slug: 'floor-refinishing',
@@ -146,12 +227,23 @@ export const services = [
     blurb: 'Fresh coats that hide scratches, dents and wear.',
     detail:
       'Most tired floors do not need replacing. Sanding back to bare wood and laying down a fresh stain and protective coat brings a scratched, dull floor back, usually for a fraction of what new flooring costs.',
+    body: [
+      'Most tired floors do not need replacing. Scratches, dents, and a dull surface are often a refinish job: sand back to bare wood, then a fresh stain and protective coat.',
+      'Done properly, that brings the floor back for a fraction of what new flooring costs — which is why we would rather tell you a refinish will do than sell you a replacement you do not need.',
+    ],
     points: [
       'Sand back to bare wood',
       'Fresh stain and protective coat',
       'Usually a fraction of replacement cost',
     ],
+    process: [
+      { title: 'Sand to bare wood', body: 'Wear, scratches, and the old finish come off so the boards can take a new coat.' },
+      { title: 'Stain to suit the home', body: 'A fresh stain that fits your light and the rest of the house.' },
+      { title: 'Protect the surface', body: 'A protective coat that brings gloss, depth, and everyday durability back.' },
+    ],
+    idealFor: ['Scratched or dull hardwood that is still sound', 'Homes wanting a new look without a full tear-out', 'Matching tired floors to a remodel'],
     icon: 'sparkle',
+    layout: 'dark-intro',
   },
   {
     slug: 'glued-engineered',
@@ -159,12 +251,23 @@ export const services = [
     blurb: 'Glued engineered hardwood with a clean finished look.',
     detail:
       'Engineered hardwood gives you a real wood wear layer over a stable core, so it copes with concrete slabs and below-grade rooms where solid hardwood would move. Glue-down installation keeps it quiet and solid underfoot.',
+    body: [
+      'Engineered hardwood gives you a real wood wear layer over a stable core. That is why it belongs on concrete slabs and in below-grade rooms where solid hardwood would move with the seasons.',
+      'We glue it down so the floor stays quiet and solid underfoot — a clean finished look without the hollow feel people dislike in floating installs.',
+    ],
     points: [
       'Real wood wear layer over a stable core',
       'Works on concrete slabs and below-grade rooms',
       'Glue-down install — quiet and solid underfoot',
     ],
+    process: [
+      { title: 'Confirm the substrate', body: 'Concrete slab or below-grade — engineered is chosen because solid hardwood would move.' },
+      { title: 'Glue it down', body: 'A glue-down install keeps the floor quiet and solid underfoot.' },
+      { title: 'Finish the look', body: 'Real wood on the surface, stable underneath, clean against the trim.' },
+    ],
+    idealFor: ['Concrete slabs and lower levels', 'Rooms where solid hardwood would cup or gap', 'Quiet, solid underfoot installs'],
     icon: 'grid',
+    layout: 'points-grid',
   },
   {
     slug: 'interior-design',
@@ -172,12 +275,23 @@ export const services = [
     blurb: 'Hardwood choices for residential and commercial spaces.',
     detail:
       'Choosing species, stain and layout is the part most people find hardest. We bring samples, talk through how each option lives with your light, your rooms and your traffic, and help you land on a floor you will still like in ten years.',
+    body: [
+      'Choosing species, stain, and layout is the part most people find hardest — and the part that is expensive to undo. We bring samples and walk through how each option lives with your light, your rooms, and your traffic.',
+      'Residential or commercial, the goal is the same: a floor you will still like in ten years, not one that only looked right in a showroom photo.',
+    ],
     points: [
       'Samples for species, stain, and layout',
       'Matched to your light, rooms, and traffic',
       'A floor you will still like in ten years',
     ],
+    process: [
+      { title: 'Bring the samples', body: 'Species, stain, and layout options you can see in your own light.' },
+      { title: 'Match the house', body: 'We talk through rooms, traffic, and how each floor will live day to day.' },
+      { title: 'Lock the direction', body: 'A clear choice before install — so the finished floor still feels right years later.' },
+    ],
+    idealFor: ['Homeowners stuck between species and stains', 'Open plans that need one floor to tie rooms together', 'Commercial spaces that still want real wood character'],
     icon: 'palette',
+    layout: 'split-feature',
   },
 ]
 

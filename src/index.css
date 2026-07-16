@@ -38,8 +38,27 @@
 }
 
 @layer components {
+  /* Single page width — use on every page/section wrapper. Never stack max-w-* on this. */
   .container-content {
     @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Shared vertical rhythm for all interior sections */
+  .section-pad {
+    @apply py-12 sm:py-20 lg:py-24;
+  }
+
+  /* Nested reading width inside container-content (forms, long copy) */
+  .measure {
+    @apply w-full max-w-3xl;
+  }
+
+  .measure-narrow {
+    @apply w-full max-w-2xl;
+  }
+
+  .measure-center {
+    @apply mx-auto w-full max-w-3xl;
   }
 
   .btn {
@@ -144,5 +163,214 @@
       transform: none !important;
       object-position: center 70%;
     }
+  }
+}
+
+/* ---------- Hero backdrop (horizontal scroll pan) ---------- */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+}
+
+.hero-backdrop picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.hero-backdrop__img {
+  display: block;
+  height: 100%;
+  width: 128%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center center;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-backdrop__img {
+    width: 100%;
+    transform: none !important;
+  }
+}
+
+/* ---------- Welcome splash ---------- */
+html.welcome-lock,
+html.welcome-lock body {
+  overflow: hidden;
+}
+
+.welcome-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #000000;
+  color: #f6f6f5;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.75s;
+}
+
+.welcome-splash.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-splash__glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 55% 40% at 50% 42%, rgba(244, 192, 116, 0.16), transparent 62%),
+    radial-gradient(ellipse 80% 55% at 50% 100%, rgba(198, 142, 60, 0.08), transparent 55%);
+  animation: welcome-glow 2.4s ease-out both;
+}
+
+.welcome-splash__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.72) 100%);
+  pointer-events: none;
+}
+
+.welcome-splash__stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.welcome-splash__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.welcome-splash__logo {
+  width: 5.25rem;
+  height: 5.25rem;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
+  animation: welcome-logo 1.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.welcome-splash__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 192, 116, 0.35);
+  animation: welcome-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.welcome-splash__brand {
+  margin-top: 1.75rem;
+  font-family: 'Bricolage Grotesque', Georgia, serif;
+  font-size: clamp(1.65rem, 4vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #ffffff;
+  animation: welcome-rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.welcome-splash__brand span {
+  color: #f4c074;
+}
+
+.welcome-splash__rule {
+  display: block;
+  width: 0;
+  height: 1px;
+  margin-top: 1.25rem;
+  background: linear-gradient(90deg, transparent, #f4c074, transparent);
+  animation: welcome-rule 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.welcome-splash__tag {
+  margin-top: 1rem;
+  max-width: 18rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232, 232, 230, 0.72);
+  animation: welcome-rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+}
+
+@keyframes welcome-logo {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes welcome-ring {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes welcome-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes welcome-rule {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 7.5rem;
+    opacity: 1;
+  }
+}
+
+@keyframes welcome-glow {
+  from {
+    opacity: 0.35;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-splash,
+  .welcome-splash__glow,
+  .welcome-splash__logo,
+  .welcome-splash__ring,
+  .welcome-splash__brand,
+  .welcome-splash__rule,
+  .welcome-splash__tag {
+    animation: none !important;
   }
 }

@@ -111,7 +111,7 @@ function ReviewCard({ review, light = false }) {
 /** Home page strip: three quotes plus the badge. */
 export default function Testimonials({ light = false }) {
   return (
-    <section className={light ? 'bg-charcoal-950 py-24' : 'bg-charcoal-50 py-24'}>
+    <section className={`section-pad ${light ? 'bg-charcoal-950' : 'bg-charcoal-50'}`}>
       <div className="container-content">
         <SectionHeading
           eyebrow="Reviews"
@@ -150,7 +150,7 @@ export default function Testimonials({ light = false }) {
 /** Full list, for the About page. */
 export function AllReviews() {
   return (
-    <section className="bg-charcoal-50 py-24">
+    <section className="section-pad bg-charcoal-50">
       <div className="container-content">
         <SectionHeading
           eyebrow="Reviews"

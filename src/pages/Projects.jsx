@@ -44,7 +44,7 @@ export default function Projects() {
       />
 
       {/* ---------- Category overview ---------- */}
-      <section className="bg-white py-20 sm:py-24">
+      <section className="section-pad bg-white">
         <div className="container-content">
           <SectionHeading
             eyebrow="Browse by category"
@@ -96,7 +96,7 @@ export default function Projects() {
       </section>
 
       {/* ---------- Before / After ---------- */}
-      <section id="before-after" className="scroll-mt-24 bg-charcoal-50 py-20 sm:py-24">
+      <section id="before-after" className="section-pad scroll-mt-24 bg-charcoal-50">
         <div className="container-content">
           <SectionHeading
             eyebrow="Before & after"
@@ -110,7 +110,7 @@ export default function Projects() {
       </section>
 
       {/* ---------- Gallery ---------- */}
-      <section id="gallery" className="scroll-mt-24 bg-white py-20 sm:py-24">
+      <section id="gallery" className="section-pad scroll-mt-24 bg-white">
         <div className="container-content">
           <SectionHeading
             eyebrow="Project Gallery"

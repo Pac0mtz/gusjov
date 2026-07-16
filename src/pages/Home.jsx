@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
-import { CtaBand, Counter, Reveal, ScrollPanImage, SectionHeading, ServiceIcon } from '../components/Bits'
+import {
+  CtaBand,
+  Counter,
+  HeroBackdrop,
+  Reveal,
+  ScrollPanImage,
+  SectionHeading,
+  ServiceIcon,
+} from '../components/Bits'
 import BeforeAfter from '../components/BeforeAfter'
 import Gallery from '../components/Gallery'
 import Testimonials from '../components/Testimonials'
@@ -44,28 +52,17 @@ export default function Home() {
       />
 
       {/* ---------- Hero ---------- */}
-      <section className="relative isolate flex h-[100svh] max-h-[100svh] items-center overflow-hidden bg-charcoal-950 sm:h-auto sm:min-h-[92vh] sm:max-h-none">
-        <picture>
-          <source
-            srcSet="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.webp"
-            type="image/webp"
-          />
-          <img
-            src="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.jpg"
-            alt=""
-            aria-hidden="true"
-            fetchpriority="high"
-            decoding="async"
-            width="1400"
-            height="1750"
-            className="absolute inset-0 -z-10 h-full w-full object-cover object-[center_30%] sm:object-center"
-          />
-        </picture>
+      <section className="relative isolate flex h-[100svh] max-h-[100svh] items-center overflow-hidden bg-charcoal-950">
+        <HeroBackdrop
+          src="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.jpg"
+          webp="/images/gallery/hardwood-refinishing/red-oak-refinish-gloss-hallway.webp"
+          priority
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-950 via-charcoal-950/85 to-charcoal-950/40" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/45 to-charcoal-950/25 sm:from-charcoal-950 sm:via-transparent sm:to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/45 to-charcoal-950/25" />
 
-        <div className="container-content w-full py-8 pt-24 sm:pb-16 sm:pt-32">
-          <div className="flex max-w-2xl flex-col justify-center">
+        <div className="container-content relative z-0 w-full py-8 pt-24 sm:pb-16 sm:pt-32">
+          <div className="measure-narrow flex flex-col justify-center">
             <p className="eyebrow animate-fade-up" style={{ animationDelay: '40ms' }}>
               {site.name}
             </p>
@@ -127,8 +124,8 @@ export default function Home() {
       </section>
 
       {/* ---------- Welcome ---------- */}
-      <section className="bg-white py-12 sm:py-20 lg:py-28">
-        <div className="container-content grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
+      <section className="section-pad bg-white">
+        <div className="container-content grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal className="relative">
             <ScrollPanImage
               className="aspect-square w-full rounded-2xl shadow-card sm:aspect-[4/5]"
@@ -173,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Services ---------- */}
-      <section className="bg-charcoal-50 py-12 sm:py-20 lg:py-28">
+      <section className="section-pad bg-charcoal-50">
         <div className="container-content">
           <SectionHeading
             eyebrow="Our Specialization"
@@ -271,7 +268,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Stats ---------- */}
-      <section className="relative isolate overflow-hidden bg-charcoal-950 py-12 sm:py-20">
+      <section className="section-pad relative isolate overflow-hidden bg-charcoal-950">
         <div className="container-content">
           <h2 className="mx-auto max-w-2xl text-center text-xl font-bold text-white sm:text-3xl">
             Nice flooring will help you stand better on your own
@@ -285,7 +282,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Before / After ---------- */}
-      <section id="before-after" className="scroll-mt-24 bg-charcoal-50 py-12 sm:py-20 lg:py-24">
+      <section id="before-after" className="section-pad scroll-mt-24 bg-charcoal-50">
         <div className="container-content">
           <SectionHeading
             eyebrow="Before & after"
@@ -304,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* ---------- Gallery ---------- */}
-      <section className="bg-white py-12 sm:py-20 lg:py-28">
+      <section className="section-pad bg-white">
         <div className="container-content">
           <SectionHeading
             eyebrow="Project Gallery"
@@ -326,9 +323,9 @@ export default function Home() {
       <Testimonials light />
 
       {/* ---------- Consultation ---------- */}
-      <section className="bg-charcoal-50 py-12 sm:py-20 lg:py-24">
+      <section className="section-pad bg-charcoal-50">
         <div className="container-content">
-          <div className="mx-auto max-w-3xl rounded-3xl bg-white p-7 text-center shadow-card sm:p-14">
+          <div className="measure-center rounded-3xl bg-white p-7 text-center shadow-card sm:p-14">
             <p className="eyebrow">Get your free consultation</p>
             <h2 className="mt-3 text-2xl font-bold text-charcoal-900 sm:text-4xl">
               Talk to us about your floors

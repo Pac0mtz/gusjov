@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-charcoal-950">
-      <div className="container-content py-10 sm:py-14 lg:py-16">
+      <div className="container-content section-pad">
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:gap-12 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 sm:gap-3" aria-label={`${site.name} — home`}>
